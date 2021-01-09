@@ -74,7 +74,7 @@ function sendMessage(topic, message) {
 */
 
 
-var client = mqtt.connect('mqtt://b9b9d1f7:860f838a013c6f86@broker.shiftr.io', {
+var client = mqtt.connect('mqtt://b9b9d1f7:860f838a013c6f86@broker.shiftr.io', 443, {
   clientId: 'javascriptNEC'
 });
 
