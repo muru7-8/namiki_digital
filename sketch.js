@@ -15,16 +15,22 @@ let creds = {
 
 
 let x, y;
-let mensajeIN;
+let camara;
+let randomX = [200];
+let randomY = [200];
+let randomZ = [200];
 
+let delta = 0.01;
 
 
 function setup(){
     x = windowWidth;
     y = windowHeight;
 
-    createCanvas(x - 20, y - 20);
+    //createCanvas(x - 20, y - 20, WEBGL);
+    createARCanvas();
 
+    // MQTT
 
     client = new Paho.MQTT.Client(broker.hostname, Number(broker.port), creds.clientID);
     // set callback handlers for the client:
@@ -42,11 +48,35 @@ function setup(){
 
     setInterval(sendMqttMessage, 500);
 
+
+
+    // array
+
+    for (let i = 0; i < 200; i++){
+      randomX[i] = random(-200,200);
+      randomY[i] = random(-200,200);
+      randomZ[i] = random(-200,200);
+    }
+
+    // Camara
+    camara = createCamera();
+    angleMode(DEGREES);
+    camara.pan(-0.8);
+
 }
 
 function draw(){
     background(0);
-    ellipse(x / 2, y / 2, 200);
+    //orbitControl();
+
+
+    if (frameCount % 160 === 0) {
+      delta *= -1;
+    }
+  
+
+    
+
 
     fill(255);
     textSize(35);
@@ -58,7 +88,16 @@ function draw(){
     text("rot Y: " + rotationY, 100, 250);
     text("rot Z: " + rotationZ, 100, 280);
 
-    
+
+    fill(255);
+    stroke(255);
+    strokeWeight(5)
+    for (let i = 0; i < randomX.length; i++){
+      point(randomX[i], randomY[i], randomZ[i]);
+    }
+
+    stroke(255,0,0);
+    line(0,-100,0,0,100,0);
     
 }
 
@@ -113,4 +152,8 @@ function sendMqttMessage() {
 
       
   }
+}
+
+function keyPressed(){
+  camara.pan(10);
 }
