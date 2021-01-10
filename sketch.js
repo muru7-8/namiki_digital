@@ -20,6 +20,10 @@ let randomX = [200];
 let randomY = [200];
 let randomZ = [200];
 
+let randomX2 = [200];
+let randomY2 = [200];
+let randomZ2 = [200];
+
 let delta = 0.01;
 
 
@@ -27,8 +31,8 @@ function setup(){
     x = windowWidth;
     y = windowHeight;
 
-    //createCanvas(x - 20, y - 20, WEBGL);
-    createARCanvas();
+    createCanvas(x - 20, y - 20, WEBGL);
+    //createARCanvas();
 
     // MQTT
 
@@ -58,24 +62,23 @@ function setup(){
       randomZ[i] = random(-200,200);
     }
 
+    for (let i = 0; i < 200; i++){
+      randomX2[i] = random(-200,200);
+      randomY2[i] = random(-200,200);
+      randomZ2[i] = random(-200,200);
+    }
+
     // Camara
     camara = createCamera();
     angleMode(DEGREES);
-    camara.pan(-0.8);
+
+    camara.setPosition(0, 0, 0);
 
 }
 
 function draw(){
     background(0);
     //orbitControl();
-
-
-    if (frameCount % 160 === 0) {
-      delta *= -1;
-    }
-  
-
-    
 
 
     fill(255);
@@ -89,15 +92,39 @@ function draw(){
     text("rot Z: " + rotationZ, 100, 280);
 
 
+
+    rotateX(rotationX);
+    rotateY(rotationY);
+    rotateZ(rotationZ);
+    
+    push();
+
+    rotateY(frameCount / 3);
     fill(255);
-    stroke(255);
+    stroke(255, 0, 0);
     strokeWeight(5)
     for (let i = 0; i < randomX.length; i++){
       point(randomX[i], randomY[i], randomZ[i]);
     }
 
-    stroke(255,0,0);
-    line(0,-100,0,0,100,0);
+    pop();
+
+    stroke(0, 255, 0);
+    strokeWeight(5)
+    for (let i = 0; i < randomX2.length; i++){
+      point(randomX2[i], randomY2[i], randomZ2[i]);
+    }
+
+    push();
+    //translate(mouseX/2, mouseY/2, 0);
+    rotateX(frameCount / 5);
+    rotateY(frameCount / 5);
+    rotateZ(frameCount / 5);
+    noFill()
+    stroke(255);
+    strokeWeight(1);
+    box(400);
+    pop();
     
 }
 
