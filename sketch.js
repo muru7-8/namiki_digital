@@ -99,7 +99,7 @@ function draw(){
     
     push();
 
-    rotateY(frameCount / 3);
+    //rotateY(frameCount / 3);
     fill(255);
     stroke(255, 0, 0);
     strokeWeight(5)
@@ -117,9 +117,9 @@ function draw(){
 
     push();
     //translate(mouseX/2, mouseY/2, 0);
-    rotateX(frameCount / 5);
-    rotateY(frameCount / 5);
-    rotateZ(frameCount / 5);
+    //rotateX(frameCount / 5);
+    //rotateY(frameCount / 5);
+    //rotateZ(frameCount / 5);
     noFill()
     stroke(255);
     strokeWeight(1);
