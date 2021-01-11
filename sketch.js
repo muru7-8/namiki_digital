@@ -87,48 +87,28 @@ function draw(){
 
     push();
     //rotateY(frameCount / 3);
-    fill(255);
-    stroke(255, 0, 0);
-    strokeWeight(1)
+    fill(0, 255, 0);
+    noStroke();
     for (let i = 0; i < randomX.length; i++){
+      push();
       translate(randomX[i], randomY[i], randomZ[i])
-      box(30);
+      box(15);
+      pop();
     }
     pop();
 
-    
+
     push();
-    stroke(0, 255, 0);
-    strokeWeight(5)
+    //rotateY(frameCount / 3);
+    fill(0, 200, 100);
+    noStroke();
     for (let i = 0; i < randomX2.length; i++){
-      point(randomX2[i], randomY2[i], randomZ2[i]);
+      push();
+      translate(randomX2[i], randomY2[i], randomZ2[i])
+      sphere(15);
+      pop();
     }
     pop();
-
-
-    push();
-    //translate(mouseX/2, mouseY/2, 0);
-    //rotateX(frameCount / 5);
-    //rotateY(frameCount / 5);
-    //rotateZ(frameCount / 5);
-    noFill()
-    stroke(255);
-    strokeWeight(1);
-    box(400);
-    pop();
-
-
-    /*
-    fill(255);
-    textSize(35);
-    text("orientacion: " + deviceOrientation, 100, 100);
-    text("ace X: " + accelerationX, 100, 130);
-    text("ace Y: " + accelerationY, 100, 160);
-    text("ace Z: " + accelerationZ, 100, 190);
-    text("rot X: " + rotationX, 100, 220);
-    text("rot Y: " + rotationY, 100, 250);
-    text("rot Z: " + rotationZ, 100, 280);
-    */
     
 }
 
