@@ -81,18 +81,6 @@ function draw(){
     //orbitControl();
 
 
-    fill(255);
-    textSize(35);
-    text("orientacion: " + deviceOrientation, 100, 100);
-    text("ace X: " + accelerationX, 100, 130);
-    text("ace Y: " + accelerationY, 100, 160);
-    text("ace Z: " + accelerationZ, 100, 190);
-    text("rot X: " + rotationX, 100, 220);
-    text("rot Y: " + rotationY, 100, 250);
-    text("rot Z: " + rotationZ, 100, 280);
-
-
-
     rotateX(rotationX);
     rotateY(rotationY);
     rotateZ(rotationZ);
@@ -125,6 +113,17 @@ function draw(){
     strokeWeight(1);
     box(400);
     pop();
+
+
+    fill(255);
+    textSize(35);
+    text("orientacion: " + deviceOrientation, 100, 100);
+    text("ace X: " + accelerationX, 100, 130);
+    text("ace Y: " + accelerationY, 100, 160);
+    text("ace Z: " + accelerationZ, 100, 190);
+    text("rot X: " + rotationX, 100, 220);
+    text("rot Y: " + rotationY, 100, 250);
+    text("rot Z: " + rotationZ, 100, 280);
     
 }
 
@@ -176,11 +175,5 @@ function sendMqttMessage() {
       aceZ = new Paho.MQTT.Message(String(accelerationZ));
       aceZ.destinationName = "namiki/aceZ";
       client.send(aceZ);
-
-      
   }
-}
-
-function keyPressed(){
-  camara.pan(10);
 }
