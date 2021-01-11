@@ -84,8 +84,8 @@ function draw(){
     rotateX(rotationX);
     rotateY(rotationY);
     
-    push();
 
+    push();
     //rotateY(frameCount / 3);
     fill(255);
     stroke(255, 0, 0);
@@ -94,14 +94,17 @@ function draw(){
       translate(randomX[i], randomY[i], randomZ[i])
       box(30);
     }
-
     pop();
 
+    
+    push();
     stroke(0, 255, 0);
     strokeWeight(5)
     for (let i = 0; i < randomX2.length; i++){
       point(randomX2[i], randomY2[i], randomZ2[i]);
     }
+    pop();
+
 
     push();
     //translate(mouseX/2, mouseY/2, 0);
