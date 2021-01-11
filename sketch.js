@@ -84,6 +84,8 @@ function draw(){
     rotateX(rotationX);
     rotateY(rotationY);
     
+    lights();
+    //ambientMaterial(250);
 
     push();
     //rotateY(frameCount / 3);
@@ -105,7 +107,7 @@ function draw(){
     for (let i = 0; i < randomX2.length; i++){
       push();
       translate(randomX2[i], randomY2[i], randomZ2[i])
-      sphere(15);
+      sphere(15, 5, 5);
       pop();
     }
     pop();
