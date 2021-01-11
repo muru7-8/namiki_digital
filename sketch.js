@@ -83,16 +83,16 @@ function draw(){
 
     rotateX(rotationX);
     rotateY(rotationY);
-    rotateZ(rotationZ);
     
     push();
 
     //rotateY(frameCount / 3);
     fill(255);
     stroke(255, 0, 0);
-    strokeWeight(5)
+    strokeWeight(1)
     for (let i = 0; i < randomX.length; i++){
-      point(randomX[i], randomY[i], randomZ[i]);
+      translate(randomX[i], randomY[i], randomZ[i])
+      box(30);
     }
 
     pop();
@@ -115,6 +115,7 @@ function draw(){
     pop();
 
 
+    /*
     fill(255);
     textSize(35);
     text("orientacion: " + deviceOrientation, 100, 100);
@@ -124,6 +125,7 @@ function draw(){
     text("rot X: " + rotationX, 100, 220);
     text("rot Y: " + rotationY, 100, 250);
     text("rot Z: " + rotationZ, 100, 280);
+    */
     
 }
 
