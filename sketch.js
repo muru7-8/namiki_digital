@@ -56,16 +56,16 @@ function setup(){
 
     // array
 
-    for (let i = 0; i < 200; i++){
-      randomX[i] = random(-200,200);
-      randomY[i] = random(-200,200);
-      randomZ[i] = random(-200,200);
-    }
+    let valorMinimo = -400;
+    let valorMaximo = 400;
 
     for (let i = 0; i < 200; i++){
-      randomX2[i] = random(-200,200);
-      randomY2[i] = random(-200,200);
-      randomZ2[i] = random(-200,200);
+      randomX[i] = random(valorMinimo, valorMaximo);
+      randomY[i] = random(valorMinimo, valorMaximo);
+      randomZ[i] = random(valorMinimo, valorMaximo);
+      randomX2[i] = random(valorMinimo, valorMaximo);
+      randomY2[i] = random(valorMinimo, valorMaximo);
+      randomZ2[i] = random(valorMinimo, valorMaximo);
     }
 
     // Camara
