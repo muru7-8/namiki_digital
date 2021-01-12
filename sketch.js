@@ -92,8 +92,9 @@ function draw(){
     
     rotateX(rotX);
     rotateY(rotY);
-    //rotateZ(rotX);
-     
+
+    rotateX(rotationX);
+    rotateY(rotationY);
 
     push();
     //rotateY(frameCount / 3);
