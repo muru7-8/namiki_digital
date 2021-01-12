@@ -83,6 +83,7 @@ function draw(){
 
     rotateX(rotationX);
     rotateY(rotationY);
+    rotateZ(rotationZ);
     
     lights();
     //ambientMaterial(250);
