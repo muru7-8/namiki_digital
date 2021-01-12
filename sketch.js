@@ -24,7 +24,7 @@ let randomX2 = [200];
 let randomY2 = [200];
 let randomZ2 = [200];
 
-let delta = 0.01;
+let rotX, rotY, rotZ;
 
 
 function setup(){
@@ -74,19 +74,26 @@ function setup(){
 
     camara.setPosition(0, 0, 0);
 
+    rotX = 0;
+    rotY = 0;
+    rotZ = 0;
+
 }
 
 function draw(){
     background(0);
+
     //orbitControl();
 
-
-    rotateX(rotationX);
-    rotateY(rotationY);
-    rotateZ(rotationZ);
-    
     lights();
-    //ambientMaterial(250);
+
+    rotX = -mouseY;
+    rotY = -mouseX;
+    
+    rotateX(rotX);
+    rotateY(rotY);
+    //rotateZ(rotX);
+     
 
     push();
     //rotateY(frameCount / 3);
@@ -165,3 +172,4 @@ function sendMqttMessage() {
       client.send(aceZ);
   }
 }
+
