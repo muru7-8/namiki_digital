@@ -29,6 +29,12 @@ let rotX, rotY, rotZ;
 let videoFondo;
 let captura;
 
+let table;
+
+let eje_x_1 = [100];
+let eje_y_1 = [100];
+let eje_z_1 = [100];
+
 
 function setup(){
     x = windowWidth;
@@ -90,6 +96,14 @@ function setup(){
     captura.hide();
     */
 
+
+   for (let r = 0; r < table.getRowCount(); r++)
+   {
+     eje_x_1[r] = table.getString(r, 2);
+     eje_y_1[r] = table.getString(r, 3);
+     eje_z_1[r] = table.getString(r, 4);
+   }
+
 }
 
 
@@ -98,12 +112,14 @@ function preload() {
   video.hide();
   video.volume(0);
   video.loop();
+
+  table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
 }
 
 function draw(){
     background(0);
     //video.loop();
-    //orbitControl();
+    orbitControl();
 
 
     lights();
@@ -116,25 +132,27 @@ function draw(){
     //normalMaterial();
     push();
     texture(video);
+    
     translate(0,0,-1000);
+    noStroke();
     plane(1920,1080,1);
     pop();
 
     
-    rotateX(rotX);
-    rotateY(rotY);
+    //rotateX(rotX);
+    //rotateY(rotY);
 
     rotateX(rotationX);
     rotateY(rotationY);
 
     push();
     //rotateY(frameCount / 3);
-    fill(0, 200, 100);
+    fill(0, 250, 100);
     noStroke();
     for (let i = 0; i < randomX2.length; i++){
       push();
-      translate(randomX2[i], randomY2[i], randomZ2[i])
-      sphere(15, 6, 6);
+      translate(eje_x_1[i], eje_y_1[i], eje_z_1[i]);
+      sphere(5, 6, 6);
       pop();
     }
     pop();
