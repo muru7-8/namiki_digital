@@ -97,11 +97,12 @@ function preload() {
   video = createVideo("assets/ninfayachira.mp4");
   video.hide();
   video.volume(0);
+  video.loop();
 }
 
 function draw(){
     background(0);
-    video.loop();
+    //video.loop();
     //orbitControl();
 
 
