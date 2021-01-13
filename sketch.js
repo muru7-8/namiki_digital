@@ -26,12 +26,15 @@ let randomZ2 = [200];
 
 let rotX, rotY, rotZ;
 
+let videoFondo;
+let captura;
+
 
 function setup(){
     x = windowWidth;
     y = windowHeight;
 
-    createCanvas(x - 20, y - 20, WEBGL);
+    createCanvas(x, y, WEBGL);
     //createARCanvas();
 
     // MQTT
@@ -78,17 +81,44 @@ function setup(){
     rotY = 0;
     rotZ = 0;
 
+
+    
+
+    /*
+    captura = createCapture(VIDEO);
+    captura.size(x, y);
+    captura.hide();
+    */
+
+}
+
+
+function preload() {
+  video = createVideo("assets/ninfayachira.mp4");
+  video.hide();
+  video.volume(0);
 }
 
 function draw(){
     background(0);
-
+    video.loop();
     //orbitControl();
+
 
     lights();
 
     rotX = -mouseY;
     rotY = -mouseX;
+
+
+    
+    //normalMaterial();
+    push();
+    texture(video);
+    translate(0,0,-1000);
+    plane(1920,1080,1);
+    pop();
+
     
     rotateX(rotX);
     rotateY(rotY);
@@ -98,28 +128,20 @@ function draw(){
 
     push();
     //rotateY(frameCount / 3);
-    fill(0, 255, 0);
-    noStroke();
-    for (let i = 0; i < randomX.length; i++){
-      push();
-      translate(randomX[i], randomY[i], randomZ[i])
-      box(15);
-      pop();
-    }
-    pop();
-
-
-    push();
-    //rotateY(frameCount / 3);
     fill(0, 200, 100);
     noStroke();
     for (let i = 0; i < randomX2.length; i++){
       push();
       translate(randomX2[i], randomY2[i], randomZ2[i])
-      sphere(15, 5, 5);
+      sphere(15, 6, 6);
       pop();
     }
     pop();
+
+    pop();
+
+    
+    
     
 }
 
