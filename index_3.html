@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>n a m i k i - d i g i t a l - v 2</title>
+		<style>
+			body { margin: 0; }
+        </style>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+        <script src="https://assets.shiftr.io/js/mqtt-2.9.0.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+
+        
+        
+	</head>
+	<body>
+        <script type="module">
+
+            // Find the latest version by visiting https://unpkg.com/three. The URL will
+            // redirect to the newest stable release.
+            import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+
+            import { MapControls } from 'https://unpkg.com/three/examples/jsm/controls/OrbitControls.js';
+
+            import { GUI } from 'https://unpkg.com/three/examples/jsm/libs/dat.gui.module.js';
+          
+
+            let camera, controls, scene, renderer;
+
+            let eje_x = [];
+            let eje_y = [];
+            let eje_z = [];
+
+            let contador = 0;
+
+            let csvData = [];
+            let csv_x = [];
+            let csv_y = [];
+            let csv_z = [];
+
+
+            init();
+			//render(); // remove when using next line for animation loop (requestAnimationFrame)
+			animate();
+
+			function init() {
+                
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0xcccccc );
+				scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				document.body.appendChild( renderer.domElement );
+
+				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera.position.set( 400, 200, 0 );
+
+				// controls
+
+				controls = new MapControls( camera, renderer.domElement );
+
+				//controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+
+				controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.05;
+
+				controls.screenSpacePanning = false;
+
+				controls.minDistance = 100;
+				controls.maxDistance = 500;
+
+                controls.maxPolarAngle = Math.PI / 2;
+                
+
+                // csv reader
+
+                const loader = new THREE.FileLoader();
+                //load a text file and output the result to the console
+                loader.load(
+	            // resource URL
+	            '/assets/csv/natural_1.csv',
+
+	            function ( data ) {
+                  let lbreak = data.split("\n");
+                  lbreak.forEach(res => {
+                  csvData.push(res.split(","));
+                  });
+                  console.table(csvData);
+                  //console.log(csvData[1][2]);
+                  
+                  for (let a = 0; a < csvData.length; a++) {
+                      csv_x[a] = parseInt(csvData[a][2]) + 25;
+                      csv_y[a] = parseInt(csvData[a][3]) + 25;
+                      csv_z[a] = parseInt(csvData[a][4]) + 25;
+                      
+                  }
+                  
+                });
+
+				// world
+
+                const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+                const esfera = new THREE.SphereBufferGeometry( 155, 7, 7 );
+				geometry.translate( 0, 0.5, 0 );
+				const material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
+
+				for ( let i = 0; i < 500; i ++ ) {
+
+					const mesh = new THREE.Mesh( geometry, material );
+					mesh.position.x = Math.random() * 1600 - 800;
+					mesh.position.y = 0;
+					mesh.position.z = Math.random() * 1600 - 800;
+					mesh.scale.x = 20;
+					mesh.scale.y = Math.random() * 80 + 10;
+					mesh.scale.z = 20;
+					mesh.updateMatrix();
+					mesh.matrixAutoUpdate = false;
+					scene.add( mesh );
+
+                }
+                
+                for ( let i = 0; i < csv_x.length; i ++ ) {
+
+                const mesh = new THREE.Mesh( esfera, material );
+                mesh.position.x = parseInt(csvData[i][2]);
+                mesh.position.y = parseInt(csvData[i][3]);
+                mesh.position.z = parseInt(csvData[i][4]);
+                mesh.updateMatrix();
+                mesh.matrixAutoUpdate = false;
+                scene.add( mesh );
+
+                console.log(parseInt(csvData[i][2]))
+
+                }
+
+
+				// lights
+
+				const dirLight1 = new THREE.DirectionalLight( 0xffffff );
+				dirLight1.position.set( 1, 1, 1 );
+				scene.add( dirLight1 );
+
+				const dirLight2 = new THREE.DirectionalLight( 0x002288 );
+				dirLight2.position.set( - 1, - 1, - 1 );
+				scene.add( dirLight2 );
+
+				const ambientLight = new THREE.AmbientLight( 0x222222 );
+				scene.add( ambientLight );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				//const gui = new GUI();
+				//gui.add( controls, 'screenSpacePanning' );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+             
+
+			function animate() {
+
+                
+				requestAnimationFrame( animate );
+
+				controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
+
+                render();
+
+			}
+
+			function render() {
+                
+
+				renderer.render( scene, camera );
+
+            }
+
+          </script>
+
+
+
+
+
+
+
+
+
+          <script>
+                let table;
+
+                let eje_x_1 = [100];
+                let eje_y_1 = [100];
+                let eje_z_1 = [100];
+
+                let contador = 0;
+
+                function setup(){
+                
+                localStorage.setItem("cantidadColumnas", table.getRowCount());
+                
+                for (let r = 0; r < table.getRowCount(); r++)
+                    {
+                        eje_x_1[r] = table.getString(r, 2);
+                        eje_y_1[r] = table.getString(r, 3);
+                        eje_z_1[r] = table.getString(r, 4);
+
+                    }
+
+                    setInterval(cadaMedioSegundo, 1);
+
+                }
+
+                function cadaMedioSegundo(){
+                    contador++;
+
+                    localStorage.setItem("data_1", eje_x_1[contador]);
+                    localStorage.setItem("data_2", eje_y_1[contador]);
+                    localStorage.setItem("data_3", eje_z_1[contador]);
+
+                    if (contador == eje_x_1.length){
+                        contador = 0;
+                    }
+
+                }
+
+                function preload(){
+                table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
+                
+                }
+
+          </script>
+
+	</body>
+</html>
