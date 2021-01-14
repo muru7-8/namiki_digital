@@ -47,14 +47,22 @@
 			const geometry = new THREE.BoxGeometry();
             const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
             
-        
-            const cube = new THREE.Mesh( geometry, material );
+            
+
+            for (let a = 0; a < csvData.length; a++) {
+              
+                const cube = new THREE.Mesh( geometry, material );
                 
                 cube.position.x = 0;
                 cube.position.y = 0;
                 cube.position.z = 0;
                 cube.updateMatrix();
+			    cube.matrixAutoUpdate = false;
                 scene.add( cube );
+            }
+
+            
+            
 
             
 			
@@ -74,7 +82,7 @@
                   lbreak.forEach(res => {
                   csvData.push(res.split(","));
                   });
-                  console.table(csvData);
+                  //console.table(csvData);
                   //console.log(csvData[1][2]);
                   
                   for (let a = 0; a < csvData.length; a++) {
@@ -89,8 +97,8 @@
 			const animate = function () {
 				requestAnimationFrame( animate );
 
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
+				//cube.rotation.x += 0.01;
+				//cube.rotation.y += 0.01;
 
 				renderer.render( scene, camera );
 			};
@@ -99,58 +107,6 @@
 
           </script>
 
-
-
-
-
-
-
-
-
-          <script>
-                let table;
-
-                let eje_x_1 = [100];
-                let eje_y_1 = [100];
-                let eje_z_1 = [100];
-
-                let contador = 0;
-
-                function setup(){
-                
-                localStorage.setItem("cantidadColumnas", table.getRowCount());
-                
-                for (let r = 0; r < table.getRowCount(); r++)
-                    {
-                        eje_x_1[r] = table.getString(r, 2);
-                        eje_y_1[r] = table.getString(r, 3);
-                        eje_z_1[r] = table.getString(r, 4);
-
-                    }
-
-                    setInterval(cadaMedioSegundo, 1);
-
-                }
-
-                function cadaMedioSegundo(){
-                    contador++;
-
-                    localStorage.setItem("data_1", eje_x_1[contador]);
-                    localStorage.setItem("data_2", eje_y_1[contador]);
-                    localStorage.setItem("data_3", eje_z_1[contador]);
-
-                    if (contador == eje_x_1.length){
-                        contador = 0;
-                    }
-
-                }
-
-                function preload(){
-                table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
-                
-                }
-
-          </script>
 
 	</body>
 </html>

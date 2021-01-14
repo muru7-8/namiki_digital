@@ -12,7 +12,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
 
-        
+        <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
         
 	</head>
 	<body>
@@ -40,13 +40,39 @@
             let csv_y = [];
             let csv_z = [];
 
+            let test;
 
-            init();
+
+			// csv reader
+			
+			var loader = new THREE.FileLoader();
+                //load a text file and output the result to the console
+                loader.load('/assets/csv/natural_1.csv', function ( data ) {
+
+				let lbreak = data.split("\n");
+                lbreak.forEach(res => {csvData.push(res.split(","));
+				});
+
+                for (let a = 0; a < csvData.length; a++) {
+					 csv_x[a] = csvData[a][2];
+					 csv_y[a] = csvData[a][3];
+					 csv_z[a] = csvData[a][4];
+				}
+
+				init();
+				             
+				});
+
+				//console.log("myCSV se ejecuta primero")
+
+			
 			//render(); // remove when using next line for animation loop (requestAnimationFrame)
 			animate();
+			
 
 			function init() {
-                
+
+				console.log(csv_x[2]);
 
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0xcccccc );
@@ -75,37 +101,16 @@
 				controls.maxDistance = 500;
 
                 controls.maxPolarAngle = Math.PI / 2;
+            
                 
 
-                // csv reader
 
-                const loader = new THREE.FileLoader();
-                //load a text file and output the result to the console
-                loader.load(
-	            // resource URL
-	            '/assets/csv/natural_1.csv',
-
-	            function ( data ) {
-                  let lbreak = data.split("\n");
-                  lbreak.forEach(res => {
-                  csvData.push(res.split(","));
-                  });
-                  console.table(csvData);
-                  //console.log(csvData[1][2]);
-                  
-                  for (let a = 0; a < csvData.length; a++) {
-                      csv_x[a] = parseInt(csvData[a][2]) + 25;
-                      csv_y[a] = parseInt(csvData[a][3]) + 25;
-                      csv_z[a] = parseInt(csvData[a][4]) + 25;
-                      
-                  }
-                  
-                });
+                
 
 				// world
 
                 const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-                const esfera = new THREE.SphereBufferGeometry( 155, 7, 7 );
+                const esfera = new THREE.SphereBufferGeometry( 10, 7, 7 );
 				geometry.translate( 0, 0.5, 0 );
 				const material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
 
@@ -113,7 +118,7 @@
 
 					const mesh = new THREE.Mesh( geometry, material );
 					mesh.position.x = Math.random() * 1600 - 800;
-					mesh.position.y = 0;
+					mesh.position.y = Math.random() * 1600 - 800;
 					mesh.position.z = Math.random() * 1600 - 800;
 					mesh.scale.x = 20;
 					mesh.scale.y = Math.random() * 80 + 10;
@@ -124,20 +129,21 @@
 
                 }
                 
-                for ( let i = 0; i < csv_x.length; i ++ ) {
+                for ( let i = 0; i < 95; i ++ ) {
 
-                const mesh = new THREE.Mesh( esfera, material );
-                mesh.position.x = parseInt(csvData[i][2]);
-                mesh.position.y = parseInt(csvData[i][3]);
-                mesh.position.z = parseInt(csvData[i][4]);
-                mesh.updateMatrix();
-                mesh.matrixAutoUpdate = false;
-                scene.add( mesh );
+                const bolita = new THREE.Mesh( esfera, material );
+                bolita.position.x = parseFloat(csv_x[i]);
+                bolita.position.y = parseFloat(csv_y[i]);
+                bolita.position.z = parseFloat(csv_z[i]);
 
-                console.log(parseInt(csvData[i][2]))
+                //bolita.position.x = Math.random() * 1600 - 800;
+                //bolita.position.y = Math.random() * 1600 - 800;
+                //bolita.position.z = Math.random() * 1600 - 800;
 
+                bolita.updateMatrix();
+                bolita.matrixAutoUpdate = false;
+                scene.add( bolita );
                 }
-
 
 				// lights
 
@@ -174,7 +180,6 @@
 
 			function animate() {
 
-                
 				requestAnimationFrame( animate );
 
 				controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
@@ -190,58 +195,6 @@
 
             }
 
-          </script>
-
-
-
-
-
-
-
-
-
-          <script>
-                let table;
-
-                let eje_x_1 = [100];
-                let eje_y_1 = [100];
-                let eje_z_1 = [100];
-
-                let contador = 0;
-
-                function setup(){
-                
-                localStorage.setItem("cantidadColumnas", table.getRowCount());
-                
-                for (let r = 0; r < table.getRowCount(); r++)
-                    {
-                        eje_x_1[r] = table.getString(r, 2);
-                        eje_y_1[r] = table.getString(r, 3);
-                        eje_z_1[r] = table.getString(r, 4);
-
-                    }
-
-                    setInterval(cadaMedioSegundo, 1);
-
-                }
-
-                function cadaMedioSegundo(){
-                    contador++;
-
-                    localStorage.setItem("data_1", eje_x_1[contador]);
-                    localStorage.setItem("data_2", eje_y_1[contador]);
-                    localStorage.setItem("data_3", eje_z_1[contador]);
-
-                    if (contador == eje_x_1.length){
-                        contador = 0;
-                    }
-
-                }
-
-                function preload(){
-                table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
-                
-                }
 
           </script>
 
