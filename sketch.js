@@ -35,6 +35,9 @@ let eje_x_1 = [100];
 let eje_y_1 = [100];
 let eje_z_1 = [100];
 
+let easycam;
+let contador;
+
 
 function setup(){
     x = windowWidth;
@@ -42,6 +45,8 @@ function setup(){
 
     createCanvas(x, y, WEBGL);
     //createARCanvas();
+    
+    easycam = createEasyCam();
 
     // MQTT
 
@@ -60,6 +65,7 @@ function setup(){
     );
 
     setInterval(sendMqttMessage, 500);
+    setInterval(cadaUnSeg, 500);
 
 
 
@@ -104,6 +110,8 @@ function setup(){
      eje_z_1[r] = table.getString(r, 4);
    }
 
+   contador = 0;
+
 }
 
 
@@ -119,7 +127,7 @@ function preload() {
 function draw(){
     background(0);
     //video.loop();
-    orbitControl();
+    //orbitControl();
 
 
     lights();
@@ -149,7 +157,7 @@ function draw(){
     //rotateY(frameCount / 3);
     fill(0, 250, 100);
     noStroke();
-    for (let i = 0; i < randomX2.length; i++){
+    for (let i = 0; i < contador; i++){
       push();
       translate(eje_x_1[i], eje_y_1[i], eje_z_1[i]);
       sphere(5, 6, 6);
@@ -157,12 +165,28 @@ function draw(){
     }
     pop();
 
-    pop();
 
     
     
     
 }
+
+
+function cadaUnSeg(){  // se ejecuta cada 1 segundo
+  contador++;
+
+  if (contador > eje_x_1.length ) {
+    contador = eje_x_1.length;
+    
+  }
+
+  console.log(contador, eje_x_1.length);
+}
+
+
+//*******************************************************************/
+//*******************************************************************/
+// MQTTT 
 
 // called when the client connects
 function onConnect() {

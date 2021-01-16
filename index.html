@@ -36,9 +36,9 @@
             let contador = 0;
 
             let csvData = [];
-            let csv_x = [];
-            let csv_y = [];
-            let csv_z = [];
+            let csv_x = [100];
+            let csv_y = [100];
+            let csv_z = [100];
 
             let test;
 
@@ -59,13 +59,13 @@
 					 csv_z[a] = csvData[a][4];
 				}
 
-				init();
+				//init();
 				             
 				});
 
 				//console.log("myCSV se ejecuta primero")
 
-			
+			init();
 			//render(); // remove when using next line for animation loop (requestAnimationFrame)
 			animate();
 			
@@ -109,7 +109,7 @@
 
 				// world
 
-                const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+				const geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
                 const esfera = new THREE.SphereBufferGeometry( 10, 7, 7 );
 				geometry.translate( 0, 0.5, 0 );
 				const material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } );
@@ -128,7 +128,9 @@
 					scene.add( mesh );
 
                 }
-                
+				
+				
+				
                 for ( let i = 0; i < 95; i ++ ) {
 
                 const bolita = new THREE.Mesh( esfera, material );
