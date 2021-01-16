@@ -29,14 +29,39 @@ let rotX, rotY, rotZ;
 let videoFondo;
 let captura;
 
-let table;
+let table, table2, table3, table4;
 
 let eje_x_1 = [100];
 let eje_y_1 = [100];
 let eje_z_1 = [100];
 
+let eje_x_2 = [100];
+let eje_y_2 = [100];
+let eje_z_2 = [100];
+
+let eje_x_3 = [100];
+let eje_y_3 = [100];
+let eje_z_3 = [100];
+
+let eje_x_4 = [100];
+let eje_y_4 = [100];
+let eje_z_4 = [100];
+
 let easycam;
 let contador;
+
+
+function preload() {
+  video = createVideo("assets/ninfayachira.mp4");
+  video.hide();
+  video.volume(0);
+  video.loop();
+
+  table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
+  table2 = loadTable('assets/csv/natural_2.csv', 'csv', 'header');
+  table3 = loadTable('assets/csv/natural_3.csv', 'csv', 'header');
+  table4 = loadTable('assets/csv/natural_4.csv', 'csv', 'header');
+}
 
 
 function setup(){
@@ -47,6 +72,7 @@ function setup(){
     //createARCanvas();
     
     easycam = createEasyCam();
+    document.oncontextmenu = function() { return false; }
 
     // MQTT
 
@@ -110,19 +136,33 @@ function setup(){
      eje_z_1[r] = table.getString(r, 4);
    }
 
+   for (let r = 0; r < table2.getRowCount(); r++)
+   {
+     eje_x_2[r] = table2.getString(r, 2);
+     eje_y_2[r] = table2.getString(r, 3);
+     eje_z_2[r] = table2.getString(r, 4);
+   }
+
+   for (let r = 0; r < table3.getRowCount(); r++)
+   {
+     eje_x_3[r] = table3.getString(r, 2);
+     eje_y_3[r] = table3.getString(r, 3);
+     eje_z_3[r] = table3.getString(r, 4);
+   }
+
+   for (let r = 0; r < table4.getRowCount(); r++)
+   {
+     eje_x_4[r] = table4.getString(r, 2);
+     eje_y_4[r] = table4.getString(r, 3);
+     eje_z_4[r] = table4.getString(r, 4);
+   }
+
    contador = 0;
 
 }
 
 
-function preload() {
-  video = createVideo("assets/ninfayachira.mp4");
-  video.hide();
-  video.volume(0);
-  video.loop();
 
-  table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
-}
 
 function draw(){
     background(0);
@@ -136,7 +176,7 @@ function draw(){
     rotY = -mouseX;
 
 
-    
+    /*
     //normalMaterial();
     push();
     texture(video);
@@ -145,7 +185,7 @@ function draw(){
     noStroke();
     plane(1920,1080,1);
     pop();
-
+    */
     
     //rotateX(rotX);
     //rotateY(rotY);
@@ -155,11 +195,58 @@ function draw(){
 
     push();
     //rotateY(frameCount / 3);
+    translate(100,0,0);
     fill(0, 250, 100);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
       translate(eje_x_1[i], eje_y_1[i], eje_z_1[i]);
+      sphere(5, 6, 6);
+      pop();
+    }
+    pop();
+
+
+
+
+    push();
+    //rotateY(frameCount / 3);
+    translate(-100, 0, 0);
+    fill(0, 100, 250);
+    noStroke();
+    for (let i = 0; i < contador; i++){
+      push();
+      translate(eje_x_2[i], eje_y_2[i], eje_z_2[i]);
+      sphere(5, 6, 6);
+      pop();
+    }
+    pop();
+
+
+
+
+    push();
+    //rotateY(frameCount / 3);
+    fill(250, 100, 0);
+    noStroke();
+    for (let i = 0; i < contador; i++){
+      push();
+      translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
+      sphere(5, 6, 6);
+      pop();
+    }
+    pop();
+
+
+
+
+    push();
+    //rotateY(frameCount / 3);
+    fill(250, 0, 100);
+    noStroke();
+    for (let i = 0; i < contador; i++){
+      push();
+      translate(eje_x_4[i], eje_y_4[i], eje_z_4[i]);
       sphere(5, 6, 6);
       pop();
     }
