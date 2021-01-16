@@ -159,6 +159,8 @@ function setup(){
 
    contador = 0;
 
+   //createA('http://p5js.org/', 'hola');
+
 }
 
 
@@ -176,6 +178,9 @@ function draw(){
     rotY = -mouseX;
 
 
+    
+
+
     /*
     //normalMaterial();
     push();
@@ -190,13 +195,13 @@ function draw(){
     //rotateX(rotX);
     //rotateY(rotY);
 
-    rotateX(rotationX);
-    rotateY(rotationY);
+    //rotateX(rotationX);
+    //rotateY(rotationY);
 
     push();
     //rotateY(frameCount / 3);
     translate(100,0,0);
-    fill(0, 250, 100);
+    fill(0, 250, 100);   // VERDE
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
@@ -212,7 +217,7 @@ function draw(){
     push();
     //rotateY(frameCount / 3);
     translate(-100, 0, 0);
-    fill(0, 100, 250);
+    fill(0, 100, 250);  // AZUL
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
