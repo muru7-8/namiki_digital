@@ -69,11 +69,12 @@ function setup(){
     y = windowHeight;
 
     createCanvas(x, y, WEBGL);
-    //createARCanvas();
     
-    easycam = createEasyCam();
+    //easycam = createEasyCam();
+    easycam = new Dw.EasyCam(this._renderer, {distance:50});
     document.oncontextmenu = function() { return false; }
 
+    
     // MQTT
 
     client = new Paho.MQTT.Client(broker.hostname, Number(broker.port), creds.clientID);
@@ -109,24 +110,15 @@ function setup(){
       randomZ2[i] = random(valorMinimo, valorMaximo);
     }
 
-    // Camara
-    camara = createCamera();
+
     angleMode(DEGREES);
 
-    camara.setPosition(0, 0, 0);
+   
+
 
     rotX = 0;
     rotY = 0;
     rotZ = 0;
-
-
-    
-
-    /*
-    captura = createCapture(VIDEO);
-    captura.size(x, y);
-    captura.hide();
-    */
 
 
    for (let r = 0; r < table.getRowCount(); r++)
@@ -159,8 +151,6 @@ function setup(){
 
    contador = 0;
 
-   //createA('http://p5js.org/', 'hola');
-
 }
 
 
@@ -169,39 +159,61 @@ function setup(){
 function draw(){
     background(0);
     //video.loop();
-    //orbitControl();
 
 
     lights();
 
-    rotX = -mouseY;
-    rotY = -mouseX;
 
+    //-------------------------------
+    //--- CUERPOS         -----------
+    //---         ORBITANTES  -------
+    //-------------------------------
 
-    
-
-
-    /*
-    //normalMaterial();
-    push();
-    texture(video);
-    
-    translate(0,0,-1000);
-    noStroke();
-    plane(1920,1080,1);
+    push()
+    fill(0,100,0);
+    rotateY(PI * frameCount / 6);
+    rotateX(frameCount * 0.03);
+    rotateZ(frameCount * 0.025);
+    translate(300, 0, 0);
+    box(100);
     pop();
-    */
+
+    //-------------------------------
+
+    push()
+    fill(0,0,100);
+    rotateY(-PI * frameCount / 8);
+    rotateX(-frameCount * 0.015);
+    rotateZ(-frameCount * 0.05);
+    translate(300, 150, 0);
+    box(100);
+    pop();
+
+    //-------------------------------
+
+    push()
+    fill(100,0,0);
+    rotateY(PI * frameCount / 10);
+    rotateX(frameCount * 0.035);
+    rotateZ(-frameCount * 0.015);
+    translate(300, -100, 0);
+    box(100);
+    pop();
+
+    //-------------------------------
+
+
+
+
+
+    //-------------------------------
+    //----- VISUALIZACIÓN       -----
+    //-----               DATOS -----
+    //-------------------------------
     
-    //rotateX(rotX);
-    //rotateY(rotY);
-
-    //rotateX(rotationX);
-    //rotateY(rotationY);
-
     push();
-    //rotateY(frameCount / 3);
     translate(100,0,0);
-    fill(0, 250, 100);   // VERDE
+    fill(0, 250, 100);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
@@ -211,13 +223,11 @@ function draw(){
     }
     pop();
 
-
-
+    //-------------------------------
 
     push();
-    //rotateY(frameCount / 3);
     translate(-100, 0, 0);
-    fill(0, 100, 250);  // AZUL
+    fill(0, 100, 250);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
@@ -227,8 +237,7 @@ function draw(){
     }
     pop();
 
-
-
+    //-------------------------------
 
     push();
     //rotateY(frameCount / 3);
@@ -242,8 +251,7 @@ function draw(){
     }
     pop();
 
-
-
+    //-------------------------------
 
     push();
     //rotateY(frameCount / 3);
@@ -264,21 +272,22 @@ function draw(){
 }
 
 
-function cadaUnSeg(){  // se ejecuta cada 1 segundo
+function cadaUnSeg(){ 
   contador++;
 
   if (contador > eje_x_1.length ) {
     contador = eje_x_1.length;
-    
   }
 
   console.log(contador, eje_x_1.length);
 }
 
 
-//*******************************************************************/
-//*******************************************************************/
-// MQTTT 
+//-----------------------------------
+//-----------------------------------
+//--------     MQTTT    -------------
+//-----------------------------------
+//-----------------------------------
 
 // called when the client connects
 function onConnect() {
