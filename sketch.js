@@ -75,7 +75,7 @@ function setup(){
     createCanvas(x, y, WEBGL);
     
     //easycam = createEasyCam();
-    easycam = new Dw.EasyCam(this._renderer, {distance:50});
+    easycam = new Dw.EasyCam(this._renderer, {distance:250});
     document.oncontextmenu = function() { return false; }
 
     
