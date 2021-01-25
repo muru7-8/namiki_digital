@@ -50,6 +50,8 @@ let eje_z_4 = [100];
 let easycam;
 let contador;
 
+let monito;
+
 
 function preload() {
   video = createVideo("assets/ninfayachira.mp4");
@@ -61,6 +63,8 @@ function preload() {
   table2 = loadTable('assets/csv/natural_2.csv', 'csv', 'header');
   table3 = loadTable('assets/csv/natural_3.csv', 'csv', 'header');
   table4 = loadTable('assets/csv/natural_4.csv', 'csv', 'header');
+
+  monito = loadModel('assets/models/monito.obj', true);
 }
 
 
@@ -170,34 +174,34 @@ function draw(){
     //-------------------------------
 
     push()
-    fill(0,100,0);
+    fill(0,180,0);
     rotateY(PI * frameCount / 6);
     rotateX(frameCount * 0.03);
     rotateZ(frameCount * 0.025);
     translate(300, 0, 0);
-    box(100);
+    model(monito);
     pop();
 
     //-------------------------------
 
     push()
-    fill(0,0,100);
+    fill(0,0,180);
     rotateY(-PI * frameCount / 8);
     rotateX(-frameCount * 0.015);
     rotateZ(-frameCount * 0.05);
     translate(300, 150, 0);
-    box(100);
+    model(monito);
     pop();
 
     //-------------------------------
 
     push()
-    fill(100,0,0);
+    fill(180,0,0);
     rotateY(PI * frameCount / 10);
     rotateX(frameCount * 0.035);
     rotateZ(-frameCount * 0.015);
     translate(300, -100, 0);
-    box(100);
+    model(monito);
     pop();
 
     //-------------------------------
@@ -212,7 +216,7 @@ function draw(){
     //-------------------------------
     
     push();
-    translate(100,0,0);
+    translate(250,0,0);
     fill(0, 250, 100);
     noStroke();
     for (let i = 0; i < contador; i++){
@@ -226,7 +230,7 @@ function draw(){
     //-------------------------------
 
     push();
-    translate(-100, 0, 0);
+    translate(-250, 0, 0);
     fill(0, 100, 250);
     noStroke();
     for (let i = 0; i < contador; i++){
@@ -241,7 +245,7 @@ function draw(){
 
     push();
     //rotateY(frameCount / 3);
-    fill(250, 100, 0);
+    fill(250, 300, 0);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
@@ -255,7 +259,7 @@ function draw(){
 
     push();
     //rotateY(frameCount / 3);
-    fill(250, 0, 100);
+    fill(250, 0, 300);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
