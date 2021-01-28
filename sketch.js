@@ -50,13 +50,12 @@ let eje_z_4 = [100];
 let easycam;
 let contador;
 
-let monito;
 
-let imgMat1;
-let imgMat2;
-let texturaPiedra1;
+// VARIABLES MODELOS 3D ///
+let monito, piedra1, test1;
 
-let piedra1;
+// VARIABLES TEXTURAS ///
+let texturaPiedra1, texturaPiedra2, texturaPiedra3, texturaPiedra4;
 
 let estadoContador = true;
 
@@ -77,9 +76,11 @@ function preload() {
 
   // TEXTURAS ///
 
-  imgMat1 = loadImage('assets/materials/salvia5.jpg');
-  imgMat2 = loadImage('assets/materials/salvia2.jpg');
-  texturaPiedra1 = loadImage('assets/materials/skysphere.jpg');
+  texturaPiedra1 = loadImage('assets/materials/texturaPiedra1.jpg');
+  texturaPiedra2 = loadImage('assets/materials/texturaPiedra2.jpg');
+  texturaPiedra3 = loadImage('assets/materials/texturaPiedra3.jpg');
+  texturaPiedra4 = loadImage('assets/materials/texturaPiedra4.jpg');
+  skySphere = loadImage('assets/materials/skysphere.jpg');
 
 
   // MODELOS 3D ////
@@ -195,7 +196,7 @@ function draw(){
     //ambientLight(50);
 
     push();
-    texture(texturaPiedra1);
+    texture(skySphere);
     //box(2000);
     sphere(2000);
     pop();
@@ -207,19 +208,18 @@ function draw(){
     noStroke();
 
     push()
-    fill(0,180,0);
+    texture(texturaPiedra1);
     rotateY(PI * frameCount / 6);
     rotateX(frameCount * 0.03);
     rotateZ(frameCount * 0.025);
     translate(300, 0, 0);
-    texture(imgMat1);
     model(monito);
     pop();
 
     //-------------------------------
 
     push()
-    fill(0,0,180);
+    texture(texturaPiedra2);
     rotateY(-PI * frameCount / 8);
     rotateX(-frameCount * 0.015);
     rotateZ(-frameCount * 0.05);
@@ -230,7 +230,7 @@ function draw(){
     //-------------------------------
 
     push()
-    fill(180,0,0);
+    texture(texturaPiedra3);
     rotateY(PI * frameCount / 10);
     rotateX(frameCount * 0.035);
     rotateZ(-frameCount * 0.015);
@@ -255,7 +255,7 @@ function draw(){
     rotateY(frameCount / 6);
     rotateZ(frameCount / 7);
     //fill(0, 250, 100);
-    texture(imgMat1);
+    texture(texturaPiedra1);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
@@ -275,7 +275,7 @@ function draw(){
     push();
     translate(-250, 0, 0);
     //fill(0, 100, 250);
-    texture(imgMat2);
+    texture(texturaPiedra2);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
@@ -292,7 +292,8 @@ function draw(){
 
     push();
     //rotateY(frameCount / 3);
-    fill(250, 300, 0);
+    //fill(250, 300, 0);
+    texture(texturaPiedra3);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
@@ -307,7 +308,8 @@ function draw(){
     push();
     
     //rotateY(frameCount / 3);
-    fill(250, 0, 300);
+    //fill(250, 0, 300);
+    texture(texturaPiedra4);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
