@@ -52,7 +52,7 @@ let contador;
 
 
 // VARIABLES MODELOS 3D ///
-let monito, piedra1, test1;
+let modeloPiedra1, modelosPiedra2, modeloPiedra3, modeloPiedra4, modeloPiedra5, modeloPiedra6, modeloPiedra7, modeloPiedra8;
 
 // VARIABLES TEXTURAS ///
 let texturaPiedra1, texturaPiedra2, texturaPiedra3, texturaPiedra4;
@@ -85,9 +85,15 @@ function preload() {
 
   // MODELOS 3D ////
 
-  monito = loadModel('assets/models/monito.obj', true);
-  piedra1 = loadModel('assets/models/piedra1.obj', true);
-  test1 = loadModel('assets/models/test1.obj', true);
+  modeloPiedra1 = loadModel('assets/models/modeloPiedras1.obj', true);
+  modeloPiedra2 = loadModel('assets/models/modeloPiedras2.obj', true);
+  modeloPiedra3 = loadModel('assets/models/modeloPiedras3.obj', true);
+  modeloPiedra4 = loadModel('assets/models/modeloPiedras4.obj', true);
+  modeloPiedra5 = loadModel('assets/models/modeloPiedras5.obj', true);
+  modeloPiedra6 = loadModel('assets/models/modeloPiedras6.obj', true);
+  modeloPiedra7 = loadModel('assets/models/modeloPiedras7.obj', true);
+  modeloPiedra8 = loadModel('assets/models/modeloPiedras8.obj', true);
+
 
 }
 
@@ -213,7 +219,7 @@ function draw(){
     rotateX(frameCount * 0.03);
     rotateZ(frameCount * 0.025);
     translate(300, 0, 0);
-    model(monito);
+    model(modeloPiedra1);
     pop();
 
     //-------------------------------
@@ -224,7 +230,7 @@ function draw(){
     rotateX(-frameCount * 0.015);
     rotateZ(-frameCount * 0.05);
     translate(300, 150, 0);
-    model(monito);
+    model(modeloPiedra2);
     pop();
 
     //-------------------------------
@@ -235,7 +241,7 @@ function draw(){
     rotateX(frameCount * 0.035);
     rotateZ(-frameCount * 0.015);
     translate(300, -100, 0);
-    model(monito);
+    model(modeloPiedra3);
     pop();
 
     //-------------------------------
@@ -254,19 +260,16 @@ function draw(){
     rotateX(frameCount / 5);
     rotateY(frameCount / 6);
     rotateZ(frameCount / 7);
-    //fill(0, 250, 100);
     texture(texturaPiedra1);
     noStroke();
-    //pointLight(255,255,255, 0, 0, 0);
     for (let i = 0; i < contador; i++){
       push();
       rotateY(i+i*2);
       rotateX(i+i*3);
       rotateZ(i+i*4);
       translate(eje_x_1[i], eje_y_1[i], eje_z_1[i]);
-      //sphere(5, 6, 6);
       scale(0.1);
-      model(test1);
+      model(modeloPiedra4);
       pop();
     }
     pop();
@@ -275,17 +278,19 @@ function draw(){
 
     push();
     translate(-250, 0, 0);
-    //fill(0, 100, 250);
+    rotateX(frameCount / 8);
+    rotateY(frameCount / 6);
+    rotateZ(frameCount / 9);
     texture(texturaPiedra2);
     noStroke();
-    //pointLight(255,255,255, 0, 0, 0);
     for (let i = 0; i < contador; i++){
       push();
       rotateY(i+i*2);
       rotateX(i+i*3);
       rotateZ(i+i*4);
       translate(eje_x_2[i], eje_y_2[i], eje_z_2[i]);
-      sphere(5, 6, 6);
+      scale(0.1);
+      model(modeloPiedra5);
       pop();
     }
     pop();
@@ -293,15 +298,19 @@ function draw(){
     //-------------------------------
 
     push();
-    //rotateY(frameCount / 3);
-    //fill(250, 300, 0);
+    rotateX(frameCount / 5);
+    rotateY(frameCount / 6);
+    rotateZ(frameCount / 7);
     texture(texturaPiedra3);
     noStroke();
-    //pointLight(255,255,255, 0, 0, 0);
     for (let i = 0; i < contador; i++){
       push();
+      rotateY(i+i*2);
+      rotateX(i+i*3);
+      rotateZ(i+i*4);
       translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
-      sphere(5, 6, 6);
+      scale(0.1);
+      model(modeloPiedra6);
       pop();
     }
     pop();
@@ -309,16 +318,19 @@ function draw(){
     //-------------------------------
 
     push();
-    
-    //rotateY(frameCount / 3);
-    //fill(250, 0, 300);
+    rotateX(frameCount / 5);
+    rotateY(frameCount / 6);
+    rotateZ(frameCount / 7);
     texture(texturaPiedra4);
     noStroke();
-    //pointLight(255,255,255, 0, 0, 0);
     for (let i = 0; i < contador; i++){
       push();
+      rotateY(i+i*2);
+      rotateX(i+i*3);
+      rotateZ(i+i*4);
       translate(eje_x_4[i], eje_y_4[i], eje_z_4[i]);
-      sphere(5, 6, 6);
+      scale(0.1);
+      model(modeloPiedra7);
       pop();
     }
     pop();
