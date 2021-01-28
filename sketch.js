@@ -52,6 +52,14 @@ let contador;
 
 let monito;
 
+let imgMat1;
+let imgMat2;
+let texturaPiedra1;
+
+let piedra1;
+
+let estadoContador = true;
+
 
 function preload() {
   video = createVideo("assets/ninfayachira.mp4");
@@ -59,12 +67,27 @@ function preload() {
   video.volume(0);
   video.loop();
 
+  // TABLAS ///
+
   table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
   table2 = loadTable('assets/csv/natural_2.csv', 'csv', 'header');
   table3 = loadTable('assets/csv/natural_3.csv', 'csv', 'header');
   table4 = loadTable('assets/csv/natural_4.csv', 'csv', 'header');
 
+
+  // TEXTURAS ///
+
+  imgMat1 = loadImage('assets/materials/salvia5.jpg');
+  imgMat2 = loadImage('assets/materials/salvia2.jpg');
+  texturaPiedra1 = loadImage('assets/materials/skysphere.jpg');
+
+
+  // MODELOS 3D ////
+
   monito = loadModel('assets/models/monito.obj', true);
+  piedra1 = loadModel('assets/models/piedra1.obj', true);
+  test1 = loadModel('assets/models/test1.obj', true);
+
 }
 
 
@@ -73,6 +96,8 @@ function setup(){
     y = windowHeight;
 
     createCanvas(x, y, WEBGL);
+
+    smooth();
     
     //easycam = createEasyCam();
     easycam = new Dw.EasyCam(this._renderer, {distance:250});
@@ -154,6 +179,7 @@ function setup(){
    }
 
    contador = 0;
+   //estadoContador = true;
 
 }
 
@@ -166,12 +192,19 @@ function draw(){
 
 
     lights();
+    //ambientLight(50);
 
-
+    push();
+    texture(texturaPiedra1);
+    //box(2000);
+    sphere(2000);
+    pop();
     //-------------------------------
     //--- CUERPOS         -----------
     //---         ORBITANTES  -------
     //-------------------------------
+
+    noStroke();
 
     push()
     fill(0,180,0);
@@ -179,6 +212,7 @@ function draw(){
     rotateX(frameCount * 0.03);
     rotateZ(frameCount * 0.025);
     translate(300, 0, 0);
+    texture(imgMat1);
     model(monito);
     pop();
 
@@ -217,12 +251,21 @@ function draw(){
     
     push();
     translate(250,0,0);
-    fill(0, 250, 100);
+    rotateX(frameCount / 5);
+    rotateY(frameCount / 6);
+    rotateZ(frameCount / 7);
+    //fill(0, 250, 100);
+    texture(imgMat1);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
+      rotateY(i+i*2);
+      rotateX(i+i*3);
+      rotateZ(i+i*4);
       translate(eje_x_1[i], eje_y_1[i], eje_z_1[i]);
-      sphere(5, 6, 6);
+      //sphere(5, 6, 6);
+      scale(0.1);
+      model(test1);
       pop();
     }
     pop();
@@ -231,10 +274,14 @@ function draw(){
 
     push();
     translate(-250, 0, 0);
-    fill(0, 100, 250);
+    //fill(0, 100, 250);
+    texture(imgMat2);
     noStroke();
     for (let i = 0; i < contador; i++){
       push();
+      rotateY(i+i*2);
+      rotateX(i+i*3);
+      rotateZ(i+i*4);
       translate(eje_x_2[i], eje_y_2[i], eje_z_2[i]);
       sphere(5, 6, 6);
       pop();
@@ -258,6 +305,7 @@ function draw(){
     //-------------------------------
 
     push();
+    
     //rotateY(frameCount / 3);
     fill(250, 0, 300);
     noStroke();
@@ -277,11 +325,25 @@ function draw(){
 
 
 function cadaUnSeg(){ 
+
+  if (estadoContador == true)
+  {
   contador++;
+  }
 
   if (contador > eje_x_1.length ) {
-    contador = eje_x_1.length;
+    //contador = 0;
+    estadoContador = false;
   }
+
+  if (estadoContador == false){
+    contador--;
+  }
+
+  if (contador == 0 & estadoContador == false) {
+    estadoContador = true;
+  }
+
 
   console.log(contador, eje_x_1.length);
 }
