@@ -193,7 +193,7 @@ function draw(){
 
 
     lights();
-    //ambientLight(50);
+    ambientLight(0);
 
     push();
     texture(skySphere);
@@ -257,6 +257,7 @@ function draw(){
     //fill(0, 250, 100);
     texture(texturaPiedra1);
     noStroke();
+    pointLight(0,255,0, 0, 0, 0);
     for (let i = 0; i < contador; i++){
       push();
       rotateY(i+i*2);
@@ -277,6 +278,7 @@ function draw(){
     //fill(0, 100, 250);
     texture(texturaPiedra2);
     noStroke();
+    pointLight(0,255,0, 0, 0, 0);
     for (let i = 0; i < contador; i++){
       push();
       rotateY(i+i*2);
@@ -295,6 +297,7 @@ function draw(){
     //fill(250, 300, 0);
     texture(texturaPiedra3);
     noStroke();
+    pointLight(0,255,0, 0, 0, 0);
     for (let i = 0; i < contador; i++){
       push();
       translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
@@ -311,6 +314,7 @@ function draw(){
     //fill(250, 0, 300);
     texture(texturaPiedra4);
     noStroke();
+    pointLight(0,255,0, 0, 0, 0);
     for (let i = 0; i < contador; i++){
       push();
       translate(eje_x_4[i], eje_y_4[i], eje_z_4[i]);
