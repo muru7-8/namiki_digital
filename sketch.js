@@ -15,7 +15,7 @@ let creds = {
 
 
 let x, y;
-let camara;
+
 let randomX = [200];
 let randomY = [200];
 let randomZ = [200];
@@ -23,13 +23,6 @@ let randomZ = [200];
 let randomX2 = [200];
 let randomY2 = [200];
 let randomZ2 = [200];
-
-let rotX, rotY, rotZ;
-
-let videoFondo;
-let captura;
-
-let table, table2, table3, table4;
 
 let eje_x_1 = [100];
 let eje_y_1 = [100];
@@ -49,18 +42,12 @@ let eje_z_4 = [100];
 
 let easycam;
 let contador;
-
-
-// VARIABLES MODELOS 3D ///
-let modeloPiedra1, modelosPiedra2, modeloPiedra3, modeloPiedra4, modeloPiedra5, modeloPiedra6, modeloPiedra7, modeloPiedra8;
-
-// VARIABLES TEXTURAS ///
-let texturaPiedra1, texturaPiedra2, texturaPiedra3, texturaPiedra4;
-
 let estadoContador = true;
 
 
 function preload() {
+
+  // VIDEOS ///
   video = createVideo("assets/ninfayachira.mp4");
   video.hide();
   video.volume(0);
@@ -82,6 +69,9 @@ function preload() {
   texturaPiedra4 = loadImage('assets/materials/texturaPiedra4.jpg');
   skySphere = loadImage('assets/materials/skysphere.jpg');
 
+  FondoOffset = loadImage('assets/materials/FondoOffset.jpg');
+  FondoOffsetBordes = loadImage('assets/materials/FondoOffsetBordes.jpg');
+
 
   // MODELOS 3D ////
 
@@ -99,14 +89,14 @@ function preload() {
 
 
 function setup(){
+
     x = windowWidth;
     y = windowHeight;
 
     createCanvas(x, y, WEBGL);
-
     smooth();
+    angleMode(DEGREES);
     
-    //easycam = createEasyCam();
     easycam = new Dw.EasyCam(this._renderer, {distance:250});
     document.oncontextmenu = function() { return false; }
 
@@ -131,7 +121,6 @@ function setup(){
     setInterval(cadaUnSeg, 500);
 
 
-
     // array
 
     let valorMinimo = -400;
@@ -145,16 +134,6 @@ function setup(){
       randomY2[i] = random(valorMinimo, valorMaximo);
       randomZ2[i] = random(valorMinimo, valorMaximo);
     }
-
-
-    angleMode(DEGREES);
-
-   
-
-
-    rotX = 0;
-    rotY = 0;
-    rotZ = 0;
 
 
    for (let r = 0; r < table.getRowCount(); r++)
@@ -186,7 +165,6 @@ function setup(){
    }
 
    contador = 0;
-   //estadoContador = true;
 
 }
 
@@ -194,31 +172,35 @@ function setup(){
 
 
 function draw(){
+
     background(0);
+    noStroke();
     //video.loop();
 
 
+    // LUCES ////
     lights();
     ambientLight(20);
 
+
+    //SKYSPHERE ///
     push();
-    texture(skySphere);
-    //box(2000);
+    texture(FondoOffsetBordes);
     sphere(2000);
     pop();
+
+
     //-------------------------------
     //--- CUERPOS         -----------
     //---         ORBITANTES  -------
     //-------------------------------
 
-    noStroke();
-
     push()
     texture(texturaPiedra1);
-    rotateY(PI * frameCount / 6);
+    rotateY(PI * frameCount / 10);
     rotateX(frameCount * 0.03);
     rotateZ(frameCount * 0.025);
-    translate(300, 0, 0);
+    translate(600, 0, 0);
     model(modeloPiedra1);
     pop();
 
@@ -226,10 +208,10 @@ function draw(){
 
     push()
     texture(texturaPiedra2);
-    rotateY(-PI * frameCount / 8);
+    rotateY(-PI * frameCount / 15);
     rotateX(-frameCount * 0.015);
     rotateZ(-frameCount * 0.05);
-    translate(300, 150, 0);
+    translate(600, 150, 0);
     model(modeloPiedra2);
     pop();
 
@@ -237,10 +219,10 @@ function draw(){
 
     push()
     texture(texturaPiedra3);
-    rotateY(PI * frameCount / 10);
+    rotateY(PI * frameCount / 20);
     rotateX(frameCount * 0.035);
     rotateZ(-frameCount * 0.015);
-    translate(300, -100, 0);
+    translate(600, -100, 0);
     model(modeloPiedra3);
     pop();
 
@@ -256,7 +238,7 @@ function draw(){
     //-------------------------------
     
     push();
-    translate(250,0,0);
+    translate(250,0,100);
     rotateX(frameCount / 5);
     rotateY(frameCount / 6);
     rotateZ(frameCount / 7);
@@ -277,7 +259,7 @@ function draw(){
     //-------------------------------
 
     push();
-    translate(-250, 0, 0);
+    translate(-250, 0, 100);
     rotateX(frameCount / 8);
     rotateY(frameCount / 6);
     rotateZ(frameCount / 9);
@@ -298,8 +280,9 @@ function draw(){
     //-------------------------------
 
     push();
-    rotateX(frameCount / 5);
-    rotateY(frameCount / 6);
+    translate(0, 250, -100);
+    rotateX(-frameCount / 5);
+    rotateY(-frameCount / 6);
     rotateZ(frameCount / 7);
     texture(texturaPiedra3);
     noStroke();
@@ -318,6 +301,7 @@ function draw(){
     //-------------------------------
 
     push();
+    translate(0, -250, -100);
     rotateX(frameCount / 5);
     rotateY(frameCount / 6);
     rotateZ(frameCount / 7);
@@ -333,10 +317,7 @@ function draw(){
       model(modeloPiedra7);
       pop();
     }
-    pop();
-
-
-    
+    pop();  
     
     
 }
