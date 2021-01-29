@@ -14,15 +14,9 @@ let creds = {
 }
 
 
-let x, y;
-
-let randomX = [200];
-let randomY = [200];
-let randomZ = [200];
-
-let randomX2 = [200];
-let randomY2 = [200];
-let randomZ2 = [200];
+/////////////////////
+/// VARIABLES ///////
+/////////////////////
 
 let eje_x_1 = [100];
 let eje_y_1 = [100];
@@ -40,6 +34,7 @@ let eje_x_4 = [100];
 let eje_y_4 = [100];
 let eje_z_4 = [100];
 
+let x, y;
 let easycam;
 let contadorUno, contadorDos, contadorTres;
 let estadoContadorUno = true;
@@ -50,10 +45,12 @@ let estadoContadorTres = true;
 function preload() {
 
   // VIDEOS ///
+
   video = createVideo("assets/ninfayachira.mp4");
   video.hide();
   video.volume(0);
   video.loop();
+
 
   // TABLAS ///
 
@@ -69,7 +66,7 @@ function preload() {
   texturaPiedra2 = loadImage('assets/materials/texturaPiedra2.jpg');
   texturaPiedra3 = loadImage('assets/materials/texturaPiedra3.jpg');
   texturaPiedra4 = loadImage('assets/materials/texturaPiedra4.jpg');
-  skySphere = loadImage('assets/materials/FondoOffsetDifuso.jpg');
+  skySphere = loadImage('assets/materials/FondoOffsetDifusoDos.jpg');
 
 
   // MODELOS 3D ////
@@ -99,8 +96,9 @@ function setup(){
     easycam = new Dw.EasyCam(this._renderer, {distance:250});
     document.oncontextmenu = function() { return false; }
 
-    
-    // MQTT
+    ///////////////////
+    // MQTT  
+    ///////////////////
 
     client = new Paho.MQTT.Client(broker.hostname, Number(broker.port), creds.clientID);
     // set callback handlers for the client:
@@ -116,27 +114,20 @@ function setup(){
         }
     );
 
-    setInterval(sendMqttMessage, 500);
 
+    /// INTERVALOS  //////
+
+    setInterval(sendMqttMessage, 500);
     setInterval(cadaUnSeg, 1000);
     setInterval(cadaUnSegYMedio, 1500);
     setInterval(cadaDosSeg, 2000);
 
 
+    // INIT DE CONTADORES ///
 
-    // array
-
-    let valorMinimo = -400;
-    let valorMaximo = 400;
-
-    for (let i = 0; i < 200; i++){
-      randomX[i] = random(valorMinimo, valorMaximo);
-      randomY[i] = random(valorMinimo, valorMaximo);
-      randomZ[i] = random(valorMinimo, valorMaximo);
-      randomX2[i] = random(valorMinimo, valorMaximo);
-      randomY2[i] = random(valorMinimo, valorMaximo);
-      randomZ2[i] = random(valorMinimo, valorMaximo);
-    }
+    contadorUno = 0;
+    contadorDos = 0;
+    contadorTres = 0;
 
 
    for (let r = 0; r < table.getRowCount(); r++)
@@ -166,10 +157,6 @@ function setup(){
      eje_y_4[r] = table4.getString(r, 3);
      eje_z_4[r] = table4.getString(r, 4);
    }
-
-   contadorUno = 0;
-   contadorDos = 0;
-   contadorTres = 0;
 
 }
 
