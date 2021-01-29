@@ -41,8 +41,10 @@ let eje_y_4 = [100];
 let eje_z_4 = [100];
 
 let easycam;
-let contador;
-let estadoContador = true;
+let contadorUno, contadorDos, contadorTres;
+let estadoContadorUno = true;
+let estadoContadorDos = true;
+let estadoContadorTres = true;
 
 
 function preload() {
@@ -67,10 +69,7 @@ function preload() {
   texturaPiedra2 = loadImage('assets/materials/texturaPiedra2.jpg');
   texturaPiedra3 = loadImage('assets/materials/texturaPiedra3.jpg');
   texturaPiedra4 = loadImage('assets/materials/texturaPiedra4.jpg');
-  skySphere = loadImage('assets/materials/skysphere.jpg');
-
-  FondoOffset = loadImage('assets/materials/FondoOffset.jpg');
-  FondoOffsetBordes = loadImage('assets/materials/FondoOffsetBordes.jpg');
+  skySphere = loadImage('assets/materials/FondoOffsetDifuso.jpg');
 
 
   // MODELOS 3D ////
@@ -118,7 +117,11 @@ function setup(){
     );
 
     setInterval(sendMqttMessage, 500);
-    setInterval(cadaUnSeg, 500);
+
+    setInterval(cadaUnSeg, 1000);
+    setInterval(cadaUnSegYMedio, 1500);
+    setInterval(cadaDosSeg, 2000);
+
 
 
     // array
@@ -164,7 +167,9 @@ function setup(){
      eje_z_4[r] = table4.getString(r, 4);
    }
 
-   contador = 0;
+   contadorUno = 0;
+   contadorDos = 0;
+   contadorTres = 0;
 
 }
 
@@ -185,7 +190,10 @@ function draw(){
 
     //SKYSPHERE ///
     push();
-    texture(FondoOffsetBordes);
+    rotateX(-frameCount / 45);
+    rotateY(frameCount / 50);
+    rotateZ(frameCount / 50);
+    texture(skySphere);
     sphere(2000);
     pop();
 
@@ -200,7 +208,7 @@ function draw(){
     rotateY(PI * frameCount / 10);
     rotateX(frameCount * 0.03);
     rotateZ(frameCount * 0.025);
-    translate(600, 0, 0);
+    translate(800, 0, 0);
     model(modeloPiedra1);
     pop();
 
@@ -211,7 +219,7 @@ function draw(){
     rotateY(-PI * frameCount / 15);
     rotateX(-frameCount * 0.015);
     rotateZ(-frameCount * 0.05);
-    translate(600, 150, 0);
+    translate(800, 150, 0);
     model(modeloPiedra2);
     pop();
 
@@ -222,7 +230,7 @@ function draw(){
     rotateY(PI * frameCount / 20);
     rotateX(frameCount * 0.035);
     rotateZ(-frameCount * 0.015);
-    translate(600, -100, 0);
+    translate(800, -100, 0);
     model(modeloPiedra3);
     pop();
 
@@ -244,7 +252,7 @@ function draw(){
     rotateZ(frameCount / 7);
     texture(texturaPiedra1);
     noStroke();
-    for (let i = 0; i < contador; i++){
+    for (let i = 0; i < contadorUno; i++){
       push();
       rotateY(i+i*2);
       rotateX(i+i*3);
@@ -265,7 +273,7 @@ function draw(){
     rotateZ(frameCount / 9);
     texture(texturaPiedra2);
     noStroke();
-    for (let i = 0; i < contador; i++){
+    for (let i = 0; i < contadorDos; i++){
       push();
       rotateY(i+i*2);
       rotateX(i+i*3);
@@ -286,7 +294,7 @@ function draw(){
     rotateZ(frameCount / 7);
     texture(texturaPiedra3);
     noStroke();
-    for (let i = 0; i < contador; i++){
+    for (let i = 0; i < contadorTres; i++){
       push();
       rotateY(i+i*2);
       rotateX(i+i*3);
@@ -307,7 +315,7 @@ function draw(){
     rotateZ(frameCount / 7);
     texture(texturaPiedra4);
     noStroke();
-    for (let i = 0; i < contador; i++){
+    for (let i = 0; i < contadorUno; i++){
       push();
       rotateY(i+i*2);
       rotateX(i+i*3);
@@ -325,26 +333,65 @@ function draw(){
 
 function cadaUnSeg(){ 
 
-  if (estadoContador == true)
+  if (estadoContadorUno == true)
   {
-  contador++;
+  contadorUno++;
   }
 
-  if (contador > eje_x_1.length ) {
+  if (contadorUno > eje_x_1.length ) {
     //contador = 0;
-    estadoContador = false;
+    estadoContadorUno = false;
   }
 
-  if (estadoContador == false){
-    contador--;
+  if (estadoContadorUno == false){
+    contadorUno--;
   }
 
-  if (contador == 0 & estadoContador == false) {
-    estadoContador = true;
+  if (contadorUno == 0 & estadoContadorUno == false) {
+    estadoContadorUno = true;
+  }
+}
+
+function cadaUnSegYMedio(){ 
+
+  if (estadoContadorDos == true)
+  {
+  contadorDos++;
   }
 
+  if (contadorDos > eje_x_1.length ) {
+    //contador = 0;
+    estadoContadorDos = false;
+  }
 
-  console.log(contador, eje_x_1.length);
+  if (estadoContadorDos == false){
+    contadorDos--;
+  }
+
+  if (contadorDos == 0 & estadoContadorDos == false) {
+    estadoContadorDos = true;
+  }
+}
+
+function cadaDosSeg(){ 
+
+  if (estadoContadorTres == true)
+  {
+  contadorTres++;
+  }
+
+  if (contadorTres > eje_x_1.length ) {
+    //contador = 0;
+    estadoContadorTres = false;
+  }
+
+  if (estadoContadorTres == false){
+    contadorTres--;
+  }
+
+  if (contadorTres == 0 & estadoContadorTres == false) {
+    estadoContadorTres = true;
+  }
 }
 
 
