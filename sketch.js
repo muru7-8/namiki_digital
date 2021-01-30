@@ -44,6 +44,7 @@ let estadoContadorTres = true;
 let botonAchira, botonSemilla, botonFatsia, botonBrus, botonLombrices, botonPajaros, botonTortuga, botonBailarina;
 
 let loading = true;
+let botonActivo = true;
 
 function preload() {
 
@@ -109,51 +110,93 @@ function setup(){
     botonSemilla = createButton("Sientes como la vida y el tiempo se acarician.");
     botonFatsia = createButton("Puedes cantar el sonido del viento.");
     botonBrus = createButton("Lo que comunica una mirada.");
-    //botonLombrices = createButton("Puedes revivir tus pisadas en la arena mojada.");
-    //botonPajaros = createButton("Mirar los gestos simples para reunir esas partes tuyas que has dejado en el camino.");
-    //botonTortuga = createButton("El tiempo interno.");
-    //botonBailarina = createButton("Vibra en el diálogo con la materia viva.");
+    botonLombrices = createButton("Puedes revivir tus pisadas en la arena mojada.");
+    botonPajaros = createButton("Mirar los gestos simples para reunir esas partes tuyas que has dejado en el camino.");
+    botonTortuga = createButton("El tiempo interno.");
+    botonBailarina = createButton("Vibra en el diálogo con la materia viva.");
 
 
     botonAchira.size(50,50);
-    botonAchira.style('background-color', 'black');
-    botonAchira.style('color', 'white');
+    botonAchira.style('background-color', 'Transparent');
+    botonAchira.style('color', 'gray');
     botonAchira.style('border', 'none');
     botonAchira.style('width', '100%');
-    botonAchira.position(0,windowHeight - 50);
+    botonAchira.position(0,windowHeight - 80);
     botonAchira.style("font-family", "Bodoni");
     botonAchira.style("font-size", "24px");
     botonAchira.mouseClicked(moverAchira);
 
     botonSemilla.size(50,50);
-    botonSemilla.style('background-color', 'black');
-    botonSemilla.style('color', 'white');
+    botonSemilla.style('background-color', 'Transparent');
+    botonSemilla.style('color', 'gray');
     botonSemilla.style('border', 'none');
     botonSemilla.style('width', '100%');
-    botonSemilla.position(0,windowHeight - 50);
+    botonSemilla.position(0,windowHeight - 80);
     botonSemilla.style("font-family", "Bodoni");
     botonSemilla.style("font-size", "24px");
     botonSemilla.mouseClicked(moverSemilla);
 
     botonFatsia.size(50,50);
-    botonFatsia.style('background-color', 'black');
-    botonFatsia.style('color', 'white');
+    botonFatsia.style('background-color', 'Transparent');
+    botonFatsia.style('color', 'gray');
     botonFatsia.style('border', 'none');
     botonFatsia.style('width', '100%');
-    botonFatsia.position(0,windowHeight - 50);
+    botonFatsia.position(0,windowHeight - 80);
     botonFatsia.style("font-family", "Bodoni");
     botonFatsia.style("font-size", "24px");
     botonFatsia.mouseClicked(moverFatsia);
 
     botonBrus.size(50,50);
-    botonBrus.style('background-color', 'black');
-    botonBrus.style('color', 'white');
+    botonBrus.style('background-color', 'Transparent');
+    botonBrus.style('color', 'gray');
     botonBrus.style('border', 'none');
     botonBrus.style('width', '100%');
-    botonBrus.position(0,windowHeight - 50);
+    botonBrus.position(0,windowHeight - 80);
     botonBrus.style("font-family", "Bodoni");
     botonBrus.style("font-size", "24px");
     botonBrus.mouseClicked(moverBrus);
+
+    botonLombrices.size(50,50);
+    botonLombrices.style('background-color', 'Transparent');
+    botonLombrices.style('color', 'gray');
+    botonLombrices.style('border', 'none');
+    botonLombrices.style('width', '100%');
+    botonLombrices.position(0,windowHeight - 80);
+    botonLombrices.style("font-family", "Bodoni");
+    botonLombrices.style("font-size", "24px");
+    botonLombrices.mouseClicked(moverLombrices);
+
+    botonPajaros.size(50,50);
+    botonPajaros.style('background-color', 'Transparent');
+    botonPajaros.style('color', 'gray');
+    botonPajaros.style('border', 'none');
+    botonPajaros.style('width', '100%');
+    botonPajaros.position(0,windowHeight - 80);
+    botonPajaros.style("font-family", "Bodoni");
+    botonPajaros.style("font-size", "24px");
+    botonPajaros.mouseClicked(moverPajaros);
+
+    botonTortuga.size(50,50);
+    botonTortuga.style('background-color', 'Transparent');
+    botonTortuga.style('color', 'gray');
+    botonTortuga.style('border', 'none');
+    botonTortuga.style('width', '100%');
+    botonTortuga.position(0,windowHeight - 80);
+    botonTortuga.style("font-family", "Bodoni");
+    botonTortuga.style("font-size", "24px");
+    botonTortuga.mouseClicked(moverTortuga);
+
+    botonBailarina.size(50,50);
+    botonBailarina.style('background-color', 'Transparent');
+    botonBailarina.style('color', 'gray');
+    botonBailarina.style('border', 'none');
+    botonBailarina.style('width', '100%');
+    botonBailarina.position(0,windowHeight - 80);
+    botonBailarina.style("font-family", "Bodoni");
+    botonBailarina.style("font-size", "24px");
+    botonBailarina.mouseClicked(moverBailarina);
+
+
 
     ///////////////////
     // MQTT  
@@ -226,10 +269,14 @@ function draw(){
 
   if (loading == true){
     background(0);
-    botonAchira.hide();
+    botonAchira.hide()
     botonSemilla.hide();
     botonFatsia.hide();
     botonBrus.hide();
+    botonLombrices.hide();
+    botonPajaros.hide();
+    botonTortuga.hide();
+    botonBailarina.hide();
     easycam.removeMouseListeners();
     imageMode(CENTER);
     image(texturaPiedra3, 0, 0, 200, 100);
@@ -240,7 +287,12 @@ function draw(){
   {
 
     easycam.attachMouseListeners();
-    botonAchira.show();
+
+    if (botonActivo == true)
+    {
+      botonAchira.show();
+    }
+    
     background(0);
     noStroke();
     //video.loop();
@@ -579,21 +631,98 @@ function moverAchira(){
   easycam.setState(estadoAchira, 2000);
   botonAchira.hide()
   botonSemilla.show();
+  botonFatsia.hide();
+  botonBrus.hide();
+  botonLombrices.hide();
+  botonPajaros.hide();
+  botonTortuga.hide();
+  botonBailarina.hide();
+
+  botonActivo = false;
 }
 
 function moverSemilla(){
   easycam.setState(estadoSemilla, 2000);
-  botonSemilla.hide()
+  botonAchira.hide()
+  botonSemilla.hide();
   botonFatsia.show();
+  botonBrus.hide();
+  botonLombrices.hide();
+  botonPajaros.hide();
+  botonTortuga.hide();
+  botonBailarina.hide();
 }
 
 function moverFatsia(){
   easycam.setState(estadoFatsia, 2000);
+  botonAchira.hide()
+  botonSemilla.hide();
   botonFatsia.hide();
   botonBrus.show();
+  botonLombrices.hide();
+  botonPajaros.hide();
+  botonTortuga.hide();
+  botonBailarina.hide();
 }
 
 function moverBrus(){
   //easycam.setState(estadoFatsia, 2000);
+  botonAchira.hide()
+  botonSemilla.hide();
+  botonFatsia.hide();
   botonBrus.hide();
+  botonLombrices.show();
+  botonPajaros.hide();
+  botonTortuga.hide();
+  botonBailarina.hide();
+}
+
+function moverLombrices(){
+  //easycam.setState(estadoFatsia, 2000);
+  botonAchira.hide()
+  botonSemilla.hide();
+  botonFatsia.hide();
+  botonBrus.hide();
+  botonLombrices.hide();
+  botonPajaros.show();
+  botonTortuga.hide();
+  botonBailarina.hide();
+}
+
+function moverPajaros(){
+  //easycam.setState(estadoFatsia, 2000);
+  botonAchira.hide()
+  botonSemilla.hide();
+  botonFatsia.hide();
+  botonBrus.hide();
+  botonLombrices.hide();
+  botonPajaros.hide();
+  botonTortuga.show();
+  botonBailarina.hide();
+}
+
+function moverTortuga(){
+  //easycam.setState(estadoFatsia, 2000);
+  botonAchira.hide()
+  botonSemilla.hide();
+  botonFatsia.hide();
+  botonBrus.hide();
+  botonLombrices.hide();
+  botonPajaros.hide();
+  botonTortuga.hide();
+  botonBailarina.show();
+}
+
+function moverBailarina(){
+  //easycam.setState(estadoFatsia, 2000);
+  botonAchira.hide()
+  botonSemilla.hide();
+  botonFatsia.hide();
+  botonBrus.hide();
+  botonLombrices.hide();
+  botonPajaros.hide();
+  botonTortuga.hide();
+  botonBailarina.hide();
+
+  botonActivo = true;
 }
