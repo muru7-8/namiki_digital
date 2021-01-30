@@ -43,6 +43,8 @@ let estadoContadorTres = true;
 
 let button;
 
+let loading = true;
+
 function preload() {
 
   // VIDEOS ///
@@ -98,7 +100,7 @@ function setup(){
     easycam = new Dw.EasyCam(this._renderer, {distance:250});
     document.oncontextmenu = function() { return false; }
 
-    button = createButton("BOOP!");
+    button = createButton("botón");
     button.size(100,50);
     button.position(10,10);
     button.style("font-family", "Bodoni");
@@ -130,7 +132,7 @@ function setup(){
     setInterval(cadaUnSeg, 1000);
     setInterval(cadaUnSegYMedio, 1500);
     setInterval(cadaDosSeg, 2000);
-
+    setInterval(afterLoad, 5000);
 
     // INIT DE CONTADORES ///
 
@@ -177,6 +179,20 @@ function moveCamera(){
 
 function draw(){
 
+  if (loading == true){
+    background(255);
+    button.hide();
+    easycam.removeMouseListeners();
+    imageMode(CENTER);
+    image(texturaPiedra3, 0, 0, 200, 100);
+
+  }
+
+  if (loading == false)
+  {
+
+    easycam.attachMouseListeners();
+    button.show();
     background(0);
     noStroke();
     //video.loop();
@@ -194,6 +210,18 @@ function draw(){
     rotateZ(frameCount / 50);
     texture(skySphere);
     sphere(2000);
+    pop();
+
+
+    // -----------------------------
+    // --- PIEDRA CENTRAL INICIO  --
+    // -----------------------------
+
+    push()
+    texture(texturaPiedra3);
+    translate(0, 0, 0);
+    scale(0.75);
+    model(modeloPiedraPantalla);
     pop();
 
 
@@ -266,9 +294,6 @@ function draw(){
 
     push()
     texture(video);
-    //rotateY(frameCount / 50);
-    //rotateX(frameCount * 0.035);
-    //rotateZ(-frameCount * 0.015);
     translate(250+150, 0, 100);
     scale(0.75);
     model(modeloPiedraPantalla);
@@ -339,7 +364,13 @@ function draw(){
     }
     pop();  
     
-    
+ 
+  }
+
+}
+
+function afterLoad(){
+  loading = false;
 }
 
 
@@ -468,14 +499,16 @@ function sendMqttMessage() {
 var state;
 
 state_2 = {
-  distance : 109.00,                 // scalar
-  center   : [109.33, -14.59, 204.49],         // vector
-  rotation : [0.732, 0.0131, 0.679, 0],  // quaternion
+  distance : 102.65,                 // scalar
+  center   : [280.2, -19.05, 212.89],         // vector
+  rotation : [-0.988, 0.054, -0.142, 0],  // quaternion
 }
 
 function keyReleased(){
   if(key == '1') state = easycam.getState();
-  if(key == '2') easycam.setState(state_2, 2000);
+  if(key == '2') easycam.setState(state_2, 1000);
   console.log(state);
 }
+
+
 
