@@ -100,8 +100,13 @@ function setup(){
     easycam = new Dw.EasyCam(this._renderer, {distance:250});
     document.oncontextmenu = function() { return false; }
 
+
+    /// ---------------------------------
+    /// --- BOTONES ---------------------
+    /// ---------------------------------
+
     botonAchira = createButton("Recuerdas las sensaciones al oler  la tierra mojada.");
-    //botonSemilla = createButton("Sientes como la vida y el tiempo se acarician.");
+    botonSemilla = createButton("Sientes como la vida y el tiempo se acarician.");
     //botonFatsia = createButton("Puedes cantar el sonido del viento.");
     //botonBrus = createButton("Lo que comunica una mirada.");
     //botonLombrices = createButton("Puedes revivir tus pisadas en la arena mojada.");
@@ -118,7 +123,17 @@ function setup(){
     botonAchira.position(0,windowHeight - 50);
     botonAchira.style("font-family", "Bodoni");
     botonAchira.style("font-size", "24px");
-    botonAchira.mouseClicked(moveCamera);
+    botonAchira.mouseClicked(moverAchira);
+
+    botonSemilla.size(50,50);
+    botonSemilla.style('background-color', 'black');
+    botonSemilla.style('color', 'white');
+    botonSemilla.style('border', 'none');
+    botonSemilla.style('width', '100%');
+    botonSemilla.position(0,windowHeight - 50);
+    botonSemilla.style("font-family", "Bodoni");
+    botonSemilla.style("font-size", "24px");
+    botonSemilla.mouseClicked(moverSemilla);
 
     ///////////////////
     // MQTT  
@@ -145,7 +160,7 @@ function setup(){
     setInterval(cadaUnSeg, 1000);
     setInterval(cadaUnSegYMedio, 1500);
     setInterval(cadaDosSeg, 2000);
-    setInterval(afterLoad, 500);
+    setInterval(afterLoad, 2000);
 
     // INIT DE CONTADORES ///
 
@@ -185,16 +200,14 @@ function setup(){
 }
 
 
-function moveCamera(){
-  easycam.setState(state_2, 2000);
 
-}
 
 function draw(){
 
   if (loading == true){
     background(0);
     botonAchira.hide();
+    botonSemilla.hide();
     easycam.removeMouseListeners();
     imageMode(CENTER);
     image(texturaPiedra3, 0, 0, 200, 100);
@@ -516,17 +529,31 @@ function sendMqttMessage() {
 
 var state;
 
-state_2 = {
+estadoAchira = {
   distance : 102.65,                 // scalar
   center   : [280.2, -19.05, 212.89],         // vector
   rotation : [-0.988, 0.054, -0.142, 0],  // quaternion
 }
 
+estadoSemilla = {
+  distance : 75.18,                 // scalar
+  center   : [203.2, -231.3, 36.92],         // vector
+  rotation : [0.949, -0.148, -0.27, 0],  // quaternion
+}
+
 function keyReleased(){
-  if(key == '1') state = easycam.getState();
-  if(key == '2') easycam.setState(state_2, 1000);
+  if(key == 's') state = easycam.getState();
   console.log(state);
 }
 
 
+function moverAchira(){
+  easycam.setState(estadoAchira, 2000);
+  botonAchira.hide()
+  botonSemilla.show();
+}
 
+function moverSemilla(){
+  easycam.setState(estadoSemilla, 2000);
+  botonSemilla.hide()
+}
