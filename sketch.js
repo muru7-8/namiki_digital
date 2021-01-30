@@ -107,8 +107,8 @@ function setup(){
 
     botonAchira = createButton("Recuerdas las sensaciones al oler  la tierra mojada.");
     botonSemilla = createButton("Sientes como la vida y el tiempo se acarician.");
-    //botonFatsia = createButton("Puedes cantar el sonido del viento.");
-    //botonBrus = createButton("Lo que comunica una mirada.");
+    botonFatsia = createButton("Puedes cantar el sonido del viento.");
+    botonBrus = createButton("Lo que comunica una mirada.");
     //botonLombrices = createButton("Puedes revivir tus pisadas en la arena mojada.");
     //botonPajaros = createButton("Mirar los gestos simples para reunir esas partes tuyas que has dejado en el camino.");
     //botonTortuga = createButton("El tiempo interno.");
@@ -134,6 +134,26 @@ function setup(){
     botonSemilla.style("font-family", "Bodoni");
     botonSemilla.style("font-size", "24px");
     botonSemilla.mouseClicked(moverSemilla);
+
+    botonFatsia.size(50,50);
+    botonFatsia.style('background-color', 'black');
+    botonFatsia.style('color', 'white');
+    botonFatsia.style('border', 'none');
+    botonFatsia.style('width', '100%');
+    botonFatsia.position(0,windowHeight - 50);
+    botonFatsia.style("font-family", "Bodoni");
+    botonFatsia.style("font-size", "24px");
+    botonFatsia.mouseClicked(moverFatsia);
+
+    botonBrus.size(50,50);
+    botonBrus.style('background-color', 'black');
+    botonBrus.style('color', 'white');
+    botonBrus.style('border', 'none');
+    botonBrus.style('width', '100%');
+    botonBrus.position(0,windowHeight - 50);
+    botonBrus.style("font-family", "Bodoni");
+    botonBrus.style("font-size", "24px");
+    botonBrus.mouseClicked(moverBrus);
 
     ///////////////////
     // MQTT  
@@ -208,6 +228,8 @@ function draw(){
     background(0);
     botonAchira.hide();
     botonSemilla.hide();
+    botonFatsia.hide();
+    botonBrus.hide();
     easycam.removeMouseListeners();
     imageMode(CENTER);
     image(texturaPiedra3, 0, 0, 200, 100);
@@ -541,6 +563,12 @@ estadoSemilla = {
   rotation : [0.949, -0.148, -0.27, 0],  // quaternion
 }
 
+estadoFatsia = {
+  distance : 336.35,                 // scalar
+  center   : [-298.8, 9.31, 97],         // vector
+  rotation : [0.40, -0.05, 0.91, 0],  // quaternion
+}
+
 function keyReleased(){
   if(key == 's') state = easycam.getState();
   console.log(state);
@@ -556,4 +584,16 @@ function moverAchira(){
 function moverSemilla(){
   easycam.setState(estadoSemilla, 2000);
   botonSemilla.hide()
+  botonFatsia.show();
+}
+
+function moverFatsia(){
+  easycam.setState(estadoFatsia, 2000);
+  botonFatsia.hide();
+  botonBrus.show();
+}
+
+function moverBrus(){
+  //easycam.setState(estadoFatsia, 2000);
+  botonBrus.hide();
 }
