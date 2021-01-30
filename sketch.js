@@ -235,9 +235,9 @@ function draw(){
     
     push();
     translate(250,0,100);
-    rotateX(frameCount / 5);
-    rotateY(frameCount / 6);
-    rotateZ(frameCount / 7);
+    rotateX(frameCount / 15);
+    rotateY(frameCount / 16);
+    rotateZ(frameCount / 17);
     texture(texturaPiedra1);
     noStroke();
     for (let i = 0; i < contadorUno; i++){
@@ -253,13 +253,14 @@ function draw(){
 
     push()
     texture(video);
-    rotateY(PI * frameCount / 20);
+    //rotateY(PI/2 * frameCount / 50);
     //rotateX(frameCount * 0.035);
     //rotateZ(-frameCount * 0.015);
-    translate(100, 0, 0);
-    scale(0.25);
+    translate(150, 0, 0);
+    scale(0.75);
     model(modeloPiedraPantalla);
     pop();
+
     pop();
 
     //-------------------------------
