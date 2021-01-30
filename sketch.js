@@ -41,6 +41,7 @@ let estadoContadorUno = true;
 let estadoContadorDos = true;
 let estadoContadorTres = true;
 
+let button;
 
 function preload() {
 
@@ -96,6 +97,13 @@ function setup(){
     
     easycam = new Dw.EasyCam(this._renderer, {distance:250});
     document.oncontextmenu = function() { return false; }
+
+    button = createButton("BOOP!");
+    button.size(100,50);
+    button.position(10,10);
+    button.style("font-family", "Bodoni");
+    button.style("font-size", "24px");
+    button.mouseClicked(moveCamera);
 
     ///////////////////
     // MQTT  
@@ -162,7 +170,10 @@ function setup(){
 }
 
 
+function moveCamera(){
+  easycam.setState(state_2, 2000);
 
+}
 
 function draw(){
 
@@ -251,17 +262,19 @@ function draw(){
       pop();
     }
 
+    pop();
+
     push()
     texture(video);
-    //rotateY(PI/2 * frameCount / 50);
+    //rotateY(frameCount / 50);
     //rotateX(frameCount * 0.035);
     //rotateZ(-frameCount * 0.015);
-    translate(150, 0, 0);
+    translate(250+150, 0, 100);
     scale(0.75);
     model(modeloPiedraPantalla);
     pop();
 
-    pop();
+    
 
     //-------------------------------
 
@@ -449,5 +462,20 @@ function sendMqttMessage() {
       aceZ.destinationName = "namiki/aceZ";
       client.send(aceZ);
   }
+}
+
+
+var state;
+
+state_2 = {
+  distance : 109.00,                 // scalar
+  center   : [109.33, -14.59, 204.49],         // vector
+  rotation : [0.732, 0.0131, 0.679, 0],  // quaternion
+}
+
+function keyReleased(){
+  if(key == '1') state = easycam.getState();
+  if(key == '2') easycam.setState(state_2, 2000);
+  console.log(state);
 }
 
