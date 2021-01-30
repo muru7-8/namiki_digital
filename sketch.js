@@ -79,6 +79,7 @@ function preload() {
   modeloPiedra6 = loadModel('assets/models/modeloPiedras6.obj', true);
   modeloPiedra7 = loadModel('assets/models/modeloPiedras7.obj', true);
   modeloPiedra8 = loadModel('assets/models/modeloPiedras8.obj', true);
+  modeloPiedraPantalla = loadModel('assets/models/modeloPiedraPantalla.obj', true);
 
 
 }
@@ -241,14 +242,24 @@ function draw(){
     noStroke();
     for (let i = 0; i < contadorUno; i++){
       push();
-      rotateY(i+i*2);
-      rotateX(i+i*3);
-      rotateZ(i+i*4);
+      rotateY(i*2);
+      rotateX(i*3);
+      rotateZ(i*4);
       translate(eje_x_1[i], eje_y_1[i], eje_z_1[i]);
       scale(0.1);
       model(modeloPiedra4);
       pop();
     }
+
+    push()
+    texture(video);
+    rotateY(PI * frameCount / 20);
+    //rotateX(frameCount * 0.035);
+    //rotateZ(-frameCount * 0.015);
+    translate(100, 0, 0);
+    scale(0.25);
+    model(modeloPiedraPantalla);
+    pop();
     pop();
 
     //-------------------------------
@@ -262,9 +273,9 @@ function draw(){
     noStroke();
     for (let i = 0; i < contadorDos; i++){
       push();
-      rotateY(i+i*2);
-      rotateX(i+i*3);
-      rotateZ(i+i*4);
+      rotateY(i*2);
+      rotateX(i*3);
+      rotateZ(i*4);
       translate(eje_x_2[i], eje_y_2[i], eje_z_2[i]);
       scale(0.1);
       model(modeloPiedra5);
@@ -283,9 +294,9 @@ function draw(){
     noStroke();
     for (let i = 0; i < contadorTres; i++){
       push();
-      rotateY(i+i*2);
-      rotateX(i+i*3);
-      rotateZ(i+i*4);
+      rotateY(i*2);
+      rotateX(i*3);
+      rotateZ(i*4);
       translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
       scale(0.1);
       model(modeloPiedra6);
@@ -304,9 +315,9 @@ function draw(){
     noStroke();
     for (let i = 0; i < contadorUno; i++){
       push();
-      rotateY(i+i*2);
-      rotateX(i+i*3);
-      rotateZ(i+i*4);
+      rotateY(i*2);
+      rotateX(i*3);
+      rotateZ(i*4);
       translate(eje_x_4[i], eje_y_4[i], eje_z_4[i]);
       scale(0.1);
       model(modeloPiedra7);
