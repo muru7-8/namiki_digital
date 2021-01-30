@@ -41,7 +41,7 @@ let estadoContadorUno = true;
 let estadoContadorDos = true;
 let estadoContadorTres = true;
 
-let button;
+let botonAchira, botonSemilla, botonFatsia, botonBrus, botonLombrices, botonPajaros, botonTortuga, botonBailarina;
 
 let loading = true;
 
@@ -100,12 +100,25 @@ function setup(){
     easycam = new Dw.EasyCam(this._renderer, {distance:250});
     document.oncontextmenu = function() { return false; }
 
-    button = createButton("botón");
-    button.size(100,50);
-    button.position(10,10);
-    button.style("font-family", "Bodoni");
-    button.style("font-size", "24px");
-    button.mouseClicked(moveCamera);
+    botonAchira = createButton("Recuerdas las sensaciones al oler  la tierra mojada.");
+    //botonSemilla = createButton("Sientes como la vida y el tiempo se acarician.");
+    //botonFatsia = createButton("Puedes cantar el sonido del viento.");
+    //botonBrus = createButton("Lo que comunica una mirada.");
+    //botonLombrices = createButton("Puedes revivir tus pisadas en la arena mojada.");
+    //botonPajaros = createButton("Mirar los gestos simples para reunir esas partes tuyas que has dejado en el camino.");
+    //botonTortuga = createButton("El tiempo interno.");
+    //botonBailarina = createButton("Vibra en el diálogo con la materia viva.");
+
+
+    botonAchira.size(50,50);
+    botonAchira.style('background-color', 'black');
+    botonAchira.style('color', 'white');
+    botonAchira.style('border', 'none');
+    botonAchira.style('width', '100%');
+    botonAchira.position(0,550);
+    botonAchira.style("font-family", "Bodoni");
+    botonAchira.style("font-size", "24px");
+    botonAchira.mouseClicked(moveCamera);
 
     ///////////////////
     // MQTT  
@@ -132,7 +145,7 @@ function setup(){
     setInterval(cadaUnSeg, 1000);
     setInterval(cadaUnSegYMedio, 1500);
     setInterval(cadaDosSeg, 2000);
-    setInterval(afterLoad, 5000);
+    setInterval(afterLoad, 500);
 
     // INIT DE CONTADORES ///
 
@@ -181,7 +194,7 @@ function draw(){
 
   if (loading == true){
     background(255);
-    button.hide();
+    botonAchira.hide();
     easycam.removeMouseListeners();
     imageMode(CENTER);
     image(texturaPiedra3, 0, 0, 200, 100);
@@ -192,7 +205,7 @@ function draw(){
   {
 
     easycam.attachMouseListeners();
-    button.show();
+    botonAchira.show();
     background(0);
     noStroke();
     //video.loop();
@@ -218,11 +231,16 @@ function draw(){
     // -----------------------------
 
     push()
-    texture(texturaPiedra3);
-    translate(0, 0, 0);
-    scale(0.75);
-    model(modeloPiedraPantalla);
+    texture(texturaPiedra4);
+    //translate(0, 0, 0);
+    rotateX(frameCount / 20);
+    rotateY(frameCount / 22);
+    rotateZ(frameCount / 30);
+    scale(0.5);
+    model(modeloPiedra7);
     pop();
+
+
 
 
     //-------------------------------
