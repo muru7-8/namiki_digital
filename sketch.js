@@ -115,7 +115,7 @@ function setup(){
     botonAchira.style('color', 'white');
     botonAchira.style('border', 'none');
     botonAchira.style('width', '100%');
-    botonAchira.position(0,550);
+    botonAchira.position(0,windowHeight - 50);
     botonAchira.style("font-family", "Bodoni");
     botonAchira.style("font-size", "24px");
     botonAchira.mouseClicked(moveCamera);
@@ -193,7 +193,7 @@ function moveCamera(){
 function draw(){
 
   if (loading == true){
-    background(255);
+    background(0);
     botonAchira.hide();
     easycam.removeMouseListeners();
     imageMode(CENTER);
