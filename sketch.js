@@ -50,10 +50,45 @@ function preload() {
 
   // VIDEOS ///
 
-  video = createVideo("assets/ninfayachira.mp4");
-  video.hide();
-  video.volume(0);
-  video.loop();
+  videoAchira = createVideo("assets/videos/videoAchira.mp4");
+  videoAchira.hide();
+  videoAchira.volume(0);
+  videoAchira.loop();
+
+  videoSemilla = createVideo("assets/assets/videos/videoSemilla.mp4");
+  videoSemilla.hide();
+  videoSemilla.volume(0);
+  videoSemilla.loop();
+
+  videoFatsia = createVideo("assets/videos/videoFatsia.mp4");
+  videoFatsia.hide();
+  videoFatsia.volume(0);
+  videoFatsia.loop();
+
+  videoBrus = createVideo("assets/videos/videoBrus.mp4");
+  videoBrus.hide();
+  videoBrus.volume(0);
+  videoBrus.loop();
+
+  videoLombrices = createVideo("assets/videos/videoLombrices.mp4");
+  videoLombrices.hide();
+  videoLombrices.volume(0);
+  videoLombrices.loop();
+
+  videoPajaros = createVideo("assets/videos/videoPajaros.mp4");
+  videoPajaros.hide();
+  videoPajaros.volume(0);
+  videoPajaros.loop();
+
+  videoTortuga = createVideo("assets/videos/videoTortuga.mp4");
+  videoTortuga.hide();
+  videoTortuga.volume(0);
+  videoTortuga.loop();
+
+  videoBailarina = createVideo("assets/videos/videoBailarina.mp4");
+  videoBailarina.hide();
+  videoBailarina.volume(0);
+  videoBailarina.loop();
 
 
   // TABLAS ///
