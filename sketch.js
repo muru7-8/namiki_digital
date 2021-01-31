@@ -46,6 +46,15 @@ let botonAchira, botonSemilla, botonFatsia, botonBrus, botonLombrices, botonPaja
 let loading = true;
 let botonActivo = true;
 
+let videoAchiraActivo = false;
+let videoSemillaActivo = false;
+let videoFatsiaActivo = false;
+let videoBrusActivo = false;
+let videoLombricesActivo = false;
+let videoPajarosActivo = false;
+let videoTortugaActivo = false;
+let videoBailarinaActivo = false;
+
 function preload() {
 
   // VIDEOS ///
@@ -432,13 +441,14 @@ function draw(){
 
     pop();
 
+    if (videoAchiraActivo == true) {
     push()
-    texture(video);
+    texture(videoAchira);
     translate(250+150, 0, 100);
     scale(0.75);
     model(modeloPiedraPantalla);
     pop();
-
+    }
     
 
     //-------------------------------
@@ -462,6 +472,15 @@ function draw(){
     }
     pop();
 
+    if (videoSemillaActivo == true) {
+      push()
+      texture(videoSemilla);
+      translate(-250+150, 0, 100);
+      scale(0.75);
+      model(modeloPiedraPantalla);
+      pop();
+      }
+
     //-------------------------------
 
     push();
@@ -483,6 +502,15 @@ function draw(){
     }
     pop();
 
+    if (videoFatsiaActivo == true) {
+      push()
+      texture(videoFatsia);
+      translate(0+150, 2500, -100);
+      scale(0.75);
+      model(modeloPiedraPantalla);
+      pop();
+      }
+
     //-------------------------------
 
     push();
@@ -502,7 +530,16 @@ function draw(){
       model(modeloPiedra7);
       pop();
     }
-    pop();  
+    pop(); 
+    
+    if (videoBrusActivo == true) {
+      push()
+      texture(videoBrus);
+      translate(0+150, -250, -100);
+      scale(0.75);
+      model(modeloPiedraPantalla);
+      pop();
+      }
     
  
   }
@@ -674,6 +711,8 @@ function moverAchira(){
   botonBailarina.hide();
 
   botonActivo = false;
+  videoAchiraActivo = true;
+  videoBailarinaActivo = false;
 }
 
 function moverSemilla(){
@@ -686,6 +725,9 @@ function moverSemilla(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.hide();
+
+  videoAchiraActivo = false;
+  videoSemillaActivo = true;
 }
 
 function moverFatsia(){
@@ -698,6 +740,9 @@ function moverFatsia(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.hide();
+
+  videoSemillaActivo = false;
+  videoFatsiaActivo = true;
 }
 
 function moverBrus(){
@@ -710,6 +755,9 @@ function moverBrus(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.hide();
+
+  videoFatsiaActivo = false;
+  videoBrusActivo = true;
 }
 
 function moverLombrices(){
@@ -722,6 +770,9 @@ function moverLombrices(){
   botonPajaros.show();
   botonTortuga.hide();
   botonBailarina.hide();
+
+  videoBrusActivo = false;
+  videoLombricesActivo = true;
 }
 
 function moverPajaros(){
@@ -734,6 +785,9 @@ function moverPajaros(){
   botonPajaros.hide();
   botonTortuga.show();
   botonBailarina.hide();
+
+  videoLombricesActivo = false;
+  videoPajarosActivo = true;
 }
 
 function moverTortuga(){
@@ -746,6 +800,9 @@ function moverTortuga(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.show();
+
+  videoPajarosActivo = false;
+  videoTortugaActivo = true;
 }
 
 function moverBailarina(){
@@ -760,4 +817,7 @@ function moverBailarina(){
   botonBailarina.hide();
 
   botonActivo = true;
+
+  videoTortugaActivo = false;
+  videoBailarinaActivo = true;
 }
