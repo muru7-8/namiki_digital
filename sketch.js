@@ -1,4 +1,9 @@
 
+// Programado por Nic Motta _ nicmotta.github.io 
+// NAMIKI - MURU7.8 
+// 2021
+
+
 // MQTT client details:
 let broker = {
   hostname: 'broker.shiftr.io',
@@ -821,3 +826,7 @@ function moverBailarina(){
   videoTortugaActivo = false;
   videoBailarinaActivo = true;
 }
+
+// Programado por Nic Motta _ nicmotta.github.io 
+// NAMIKI - MURU7.8 
+// 2021
