@@ -62,6 +62,12 @@ let videoBailarinaActivo = false;
 
 function preload() {
 
+  // IMAGENES ///
+
+  PantallaInicioTest = loadImage('assets/images/PortadaNamiki.png');
+  PantallaInicio = createImg('assets/images/PantallaInicioAnimada.gif');
+  PantallaInicio.hide();
+
   // VIDEOS ///
 
   videoAchira = createVideo("assets/videos/videoAchira.mp4");
@@ -328,7 +334,7 @@ function draw(){
     botonBailarina.hide();
     easycam.removeMouseListeners();
     imageMode(CENTER);
-    image(texturaPiedra3, 0, 0, 200, 100);
+    image(PantallaInicioTest, 0, 0, 600, 400);
 
   }
 
@@ -450,6 +456,8 @@ function draw(){
     push()
     texture(videoAchira);
     translate(250+150, 0, 100);
+    rotateY(180);
+    rotateZ(180);
     scale(0.75);
     model(modeloPiedraPantalla);
     pop();
