@@ -46,7 +46,9 @@ let estadoContadorUno = true;
 let estadoContadorDos = true;
 let estadoContadorTres = true;
 
-let botonAchira, botonSemilla, botonFatsia, botonBrus, botonLombrices, botonPajaros, botonTortuga, botonBailarina;
+let botonAchira, botonSemilla, botonFatsia, botonBrus, botonLombrices, botonPajaros, botonTortuga, botonBailarina, botonContinuar;
+let table, table2, table3, table4;
+let sonidoAchira;
 
 let loading = true;
 let botonActivo = true;
@@ -110,6 +112,9 @@ function preload() {
   videoBailarina.volume(0);
   videoBailarina.loop();
 
+  // SONIDOS ///
+  sonidoAchira = loadSound("assets/sounds/sonidoAchira.mp3");
+
 
   // TABLAS ///
 
@@ -125,7 +130,7 @@ function preload() {
   texturaPiedra2 = loadImage('assets/materials/texturaPiedra2.jpg');
   texturaPiedra3 = loadImage('assets/materials/texturaPiedra3.jpg');
   texturaPiedra4 = loadImage('assets/materials/texturaPiedra4.jpg');
-  skySphere = loadImage('assets/materials/FondoOffsetDifusoDos.jpg');
+  skySphere = loadImage('assets/materials/skySphere.jpg');
 
 
   // MODELOS 3D ////
@@ -157,10 +162,16 @@ function setup(){
     document.oncontextmenu = function() { return false; }
 
 
+    // SETEOS INICIALES
+
+    
+
+
     /// ---------------------------------
     /// --- BOTONES ---------------------
     /// ---------------------------------
 
+    botonContinuar = createButton("Toca aquí para continuar y navegar.");
     botonAchira = createButton("Recuerdas las sensaciones al oler  la tierra mojada.");
     botonSemilla = createButton("Sientes como la vida y el tiempo se acarician.");
     botonFatsia = createButton("Puedes cantar el sonido del viento.");
@@ -170,6 +181,16 @@ function setup(){
     botonTortuga = createButton("El tiempo interno.");
     botonBailarina = createButton("Vibra en el diálogo con la materia viva.");
 
+
+    botonContinuar.size(50,50);
+    botonContinuar.style('background-color', 'Transparent');
+    botonContinuar.style('color', 'gray');
+    botonContinuar.style('border', 'none');
+    botonContinuar.style('width', '100%');
+    botonContinuar.position(0,windowHeight - 80);
+    botonContinuar.style("font-family", "Bodoni");
+    botonContinuar.style("font-size", "24px");
+    botonContinuar.mouseClicked(afterLoad);
 
     botonAchira.size(50,50);
     botonAchira.style('background-color', 'Transparent');
@@ -278,7 +299,6 @@ function setup(){
     setInterval(cadaUnSeg, 1000);
     setInterval(cadaUnSegYMedio, 1500);
     setInterval(cadaDosSeg, 2000);
-    setInterval(afterLoad, 2000);
 
     // INIT DE CONTADORES ///
 
@@ -315,6 +335,7 @@ function setup(){
      eje_z_4[r] = table4.getString(r, 4);
    }
 
+   
 }
 
 
@@ -324,6 +345,7 @@ function draw(){
 
   if (loading == true){
     background(0);
+    botonContinuar.show();
     botonAchira.hide()
     botonSemilla.hide();
     botonFatsia.hide();
@@ -334,7 +356,7 @@ function draw(){
     botonBailarina.hide();
     easycam.removeMouseListeners();
     imageMode(CENTER);
-    image(PantallaInicioTest, 0, 0, 600, 400);
+    image(PantallaInicioTest, 0, 0, 600, 300);
 
   }
 
@@ -346,6 +368,7 @@ function draw(){
     if (botonActivo == true)
     {
       botonAchira.show();
+      botonContinuar.hide();
     }
     
     background(0);
@@ -433,7 +456,7 @@ function draw(){
     //-------------------------------
     
     push();
-    translate(250,0,100);
+    translate(350,0,150);
     rotateX(frameCount / 15);
     rotateY(frameCount / 16);
     rotateZ(frameCount / 17);
@@ -454,8 +477,9 @@ function draw(){
 
     if (videoAchiraActivo == true) {
     push()
-    texture(videoAchira);
-    translate(250+150, 0, 100);
+    //texture(videoAchira);
+    texture(videoBailarina);
+    translate(350+150, 0, 150);
     rotateY(180);
     rotateZ(180);
     scale(0.75);
@@ -557,10 +581,6 @@ function draw(){
  
   }
 
-}
-
-function afterLoad(){
-  loading = false;
 }
 
 
@@ -689,9 +709,9 @@ function sendMqttMessage() {
 var state;
 
 estadoAchira = {
-  distance : 102.65,                 // scalar
-  center   : [280.2, -19.05, 212.89],         // vector
-  rotation : [-0.988, 0.054, -0.142, 0],  // quaternion
+  distance : 113.4,                 // scalar
+  center   : [388.43259181909866, -13.774992481535978, 245.31093773456763],         // vector
+  rotation : [0.9892567634210506, -0.049120598116837416, 0.1376421802140396, 0],  // quaternion
 }
 
 estadoSemilla = {
@@ -711,6 +731,13 @@ function keyReleased(){
   console.log(state);
 }
 
+function afterLoad(){
+  loading = false;
+  sonidoAchira.loop();
+  sonidoAchira.volume(0.5);
+  sonidoAchira.play();
+  
+}
 
 function moverAchira(){
   easycam.setState(estadoAchira, 2000);
@@ -722,10 +749,12 @@ function moverAchira(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.hide();
+  botonContinuar.hide();
 
   botonActivo = false;
   videoAchiraActivo = true;
   videoBailarinaActivo = false;
+  
 }
 
 function moverSemilla(){
@@ -738,6 +767,7 @@ function moverSemilla(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.hide();
+  botonContinuar.hide();
 
   videoAchiraActivo = false;
   videoSemillaActivo = true;
@@ -753,6 +783,7 @@ function moverFatsia(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.hide();
+  botonContinuar.hide();
 
   videoSemillaActivo = false;
   videoFatsiaActivo = true;
@@ -768,6 +799,7 @@ function moverBrus(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.hide();
+  botonContinuar.hide();
 
   videoFatsiaActivo = false;
   videoBrusActivo = true;
@@ -783,6 +815,7 @@ function moverLombrices(){
   botonPajaros.show();
   botonTortuga.hide();
   botonBailarina.hide();
+  botonContinuar.hide();
 
   videoBrusActivo = false;
   videoLombricesActivo = true;
@@ -798,6 +831,7 @@ function moverPajaros(){
   botonPajaros.hide();
   botonTortuga.show();
   botonBailarina.hide();
+  botonContinuar.hide();
 
   videoLombricesActivo = false;
   videoPajarosActivo = true;
@@ -813,6 +847,7 @@ function moverTortuga(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.show();
+  botonContinuar.hide();
 
   videoPajarosActivo = false;
   videoTortugaActivo = true;
@@ -828,6 +863,7 @@ function moverBailarina(){
   botonPajaros.hide();
   botonTortuga.hide();
   botonBailarina.hide();
+  botonContinuar.hide();
 
   botonActivo = true;
 
