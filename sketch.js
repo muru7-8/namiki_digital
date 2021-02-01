@@ -726,6 +726,12 @@ estadoFatsia = {
   rotation : [0.40, -0.05, 0.91, 0],  // quaternion
 }
 
+estadoBrus = {
+  distance : 295,                 // scalar
+  center   : [92.21312168018297, 234.88868295258973, -259.3242005560117],         // vector
+  rotation : [0.7177836424269413, -0.1647329217013579, -0.67154105369265, 0],  // quaternion
+}
+
 function keyReleased(){
   if(key == 's') state = easycam.getState();
   console.log(state);
@@ -790,7 +796,7 @@ function moverFatsia(){
 }
 
 function moverBrus(){
-  //easycam.setState(estadoFatsia, 2000);
+  easycam.setState(estadoBrus, 2000);
   botonAchira.hide()
   botonSemilla.hide();
   botonFatsia.hide();
