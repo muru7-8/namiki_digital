@@ -113,7 +113,7 @@ function preload() {
   videoBailarina.loop();
 
   // SONIDOS ///
-  sonidoAchira = loadSound("assets/sounds/sonidoAchira.mp3");
+ // sonidoAchira = loadSound("assets/sounds/sonidoAchira.mp3");
 
 
   // TABLAS ///
@@ -739,10 +739,12 @@ function keyReleased(){
 
 function afterLoad(){
   loading = false;
+
+  /*
   sonidoAchira.loop();
   sonidoAchira.volume(0.5);
   sonidoAchira.play();
-  
+  */
 }
 
 function moverAchira(){
