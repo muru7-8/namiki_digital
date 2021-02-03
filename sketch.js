@@ -77,7 +77,7 @@ function preload() {
   videoAchira.volume(0);
   videoAchira.loop();
 
-  videoSemilla = createVideo("assets/assets/videos/videoSemilla.mp4");
+  videoSemilla = createVideo("assets/videos/videoSemilla.mp4");
   videoSemilla.hide();
   videoSemilla.volume(0);
   videoSemilla.loop();
@@ -113,7 +113,7 @@ function preload() {
   videoBailarina.loop();
 
   // SONIDOS ///
- // sonidoAchira = loadSound("assets/sounds/sonidoAchira.mp3");
+ sonidoAchira = loadSound("assets/sounds/sonidoAchira.mp3");
 
 
   // TABLAS ///
@@ -131,6 +131,7 @@ function preload() {
   texturaPiedra3 = loadImage('assets/materials/texturaPiedra3.jpg');
   texturaPiedra4 = loadImage('assets/materials/texturaPiedra4.jpg');
   skySphere = loadImage('assets/materials/skySphere.jpg');
+  //skyOptativo = loadImage('assets/materials/skySphere.jpg');
 
 
   // MODELOS 3D ////
@@ -740,11 +741,11 @@ function keyReleased(){
 function afterLoad(){
   loading = false;
 
-  /*
+  
   sonidoAchira.loop();
   sonidoAchira.volume(0.5);
   sonidoAchira.play();
-  */
+  
 }
 
 function moverAchira(){
