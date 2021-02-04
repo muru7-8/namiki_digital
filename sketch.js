@@ -77,6 +77,11 @@ function preload() {
   videoAchira.volume(0);
   videoAchira.loop();
 
+  videoAchira2 = createVideo("assets/videos/videoAchira2.mp4");
+  videoAchira2.hide();
+  videoAchira2.volume(0);
+  videoAchira2.loop();
+
   videoSemilla = createVideo("assets/videos/videoSemilla.mp4");
   videoSemilla.hide();
   videoSemilla.volume(0);
@@ -144,7 +149,8 @@ function preload() {
   modeloPiedra6 = loadModel('assets/models/modeloPiedras6.obj', true);
   modeloPiedra7 = loadModel('assets/models/modeloPiedras7.obj', true);
   modeloPiedra8 = loadModel('assets/models/modeloPiedras8.obj', true);
-  modeloPiedraPantalla = loadModel('assets/models/modeloPiedraPantalla.obj', true);
+  modeloPiedraPantalla = loadModel('assets/models/modeloPiedraPantalla2.obj', true);
+
 
 
 }
@@ -479,7 +485,7 @@ function draw(){
     if (videoAchiraActivo == true) {
     push()
     //texture(videoAchira);
-    texture(videoBailarina);
+    texture(videoAchira2);
     translate(350+150, 0, 150);
     rotateY(180);
     rotateZ(180);
