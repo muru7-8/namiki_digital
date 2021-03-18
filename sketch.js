@@ -39,6 +39,35 @@ let eje_x_4 = [100];
 let eje_y_4 = [100];
 let eje_z_4 = [100];
 
+let AchiraX = [100];
+let AchiraY = [100];
+let AchiraZ = [100];
+
+let SemillasX = [100];
+let SemillasY = [100];
+let SemillasZ = [100];
+
+let FatsiaX = [100];
+let FatsiaY = [100];
+let FatsiaZ = [100];
+
+let BrusX = [100];
+let BrusY = [100];
+let BrusZ = [100];
+
+let LombricesX = [100];
+let LombricesY = [100];
+let LombricesZ = [100];
+
+let PajarosX = [100];
+let PajarosY = [100];
+let PajarosZ = [100];
+
+let TortugaX = [100];
+let TortugaY = [100];
+let TortugaZ = [100];
+
+
 let x, y;
 let easycam;
 let contadorUno, contadorDos, contadorTres;
@@ -48,6 +77,7 @@ let estadoContadorTres = true;
 
 let botonAchira, botonSemilla, botonFatsia, botonBrus, botonLombrices, botonPajaros, botonTortuga, botonBailarina, botonContinuar;
 let table, table2, table3, table4;
+let tablaAchira, tablaSemillas, tablaFatsia, tablaBrus, tablaLombrices, tablaPajaros, tablaTortuga;
 let sonidoAchira;
 
 let loading = true;
@@ -61,6 +91,9 @@ let videoLombricesActivo = false;
 let videoPajarosActivo = false;
 let videoTortugaActivo = false;
 let videoBailarinaActivo = false;
+
+
+let textoRespira = 0;
 
 function preload() {
 
@@ -123,6 +156,14 @@ function preload() {
   table3 = loadTable('assets/csv/natural_3.csv', 'csv', 'header');
   table4 = loadTable('assets/csv/natural_4.csv', 'csv', 'header');
 
+  //tablaAchira = loadTable('assets/csv/achira.csv', 'csv', 'header');
+  //tablaSemillas = loadTable('assets/csv/semillas.csv', 'csv', 'header');
+  //tablaFatsia = loadTable('assets/csv/fatsia.csv', 'csv', 'header');
+  //tablaBrus = loadTable('assets/csv/brus.csv', 'csv', 'header');
+  //tablaLombrices = loadTable('assets/csv/lombrices.csv', 'csv', 'header');
+  //tablaPajaros = loadTable('assets/csv/pajaros.csv', 'csv', 'header');
+  //tablaTortuga = loadTable('assets/csv/tortuga.csv', 'csv', 'header');
+
 
   // TEXTURAS ///
 
@@ -131,7 +172,7 @@ function preload() {
   texturaPiedra3 = loadImage('assets/materials/texturaPiedra3.jpg');
   texturaPiedra4 = loadImage('assets/materials/texturaPiedra4.jpg');
   skySphere = loadImage('assets/materials/skySphere.jpg');
-  //skyOptativo = loadImage('assets/materials/skySphere.jpg');
+  screenTest = loadImage('assets/videos/ScreenTest.png');
 
 
   // MODELOS 3D ////
@@ -173,17 +214,18 @@ function setup(){
     /// --- BOTONES ---------------------
     /// ---------------------------------
 
-    botonContinuar = createButton("Toca aquí para continuar y navegar.");
-    botonAchira = createButton("Recuerdas las sensaciones al oler  la tierra mojada.");
-    botonSemilla = createButton("Sientes como la vida y el tiempo se acarician.");
-    botonFatsia = createButton("Puedes cantar el sonido del viento.");
-    botonBrus = createButton("Lo que comunica una mirada.");
-    botonLombrices = createButton("Puedes revivir tus pisadas en la arena mojada.");
-    botonPajaros = createButton("Mirar los gestos simples para reunir esas partes tuyas que has dejado en el camino.");
-    botonTortuga = createButton("El tiempo interno.");
-    botonBailarina = createButton("Vibra en el diálogo con la materia viva.");
+    botonContinuar = createButton("Toque aquí para continuar y navegar por el espacio virtual.");
+    botonAchira = createButton("Recuerdas las sensaciones al oler  la tierra mojada...");
+    botonSemilla = createButton("Sientes como la vida y el tiempo se acarician...");
+    botonFatsia = createButton("Puedes cantar el sonido del viento...");
+    botonBrus = createButton("Lo que comunica una mirada...");
+    botonLombrices = createButton("Puedes revivir tus pisadas en la arena mojada...");
+    botonPajaros = createButton("Mirar los gestos simples para reunir esas partes tuyas que has dejado en el camino...");
+    botonTortuga = createButton("El tiempo interno...");
+    botonBailarina = createButton("Vibra en el diálogo con la materia viva...");
 
 
+    
     botonContinuar.size(50,50);
     botonContinuar.style('background-color', 'Transparent');
     botonContinuar.style('color', 'gray');
@@ -193,6 +235,7 @@ function setup(){
     botonContinuar.style("font-family", "Bodoni");
     botonContinuar.style("font-size", "24px");
     botonContinuar.mouseClicked(afterLoad);
+    
 
     botonAchira.size(50,50);
     botonAchira.style('background-color', 'Transparent');
@@ -301,6 +344,7 @@ function setup(){
     setInterval(cadaUnSeg, 1000);
     setInterval(cadaUnSegYMedio, 1500);
     setInterval(cadaDosSeg, 2000);
+    setInterval(loopRespira, 50);
 
     // INIT DE CONTADORES ///
 
@@ -337,6 +381,15 @@ function setup(){
      eje_z_4[r] = table4.getString(r, 4);
    }
 
+
+   /*
+   for (let r = 0; r < tablaAchira.getRowCount(); r++)
+   {
+     AchiraX[r] = tablaAchira.getString(r, 2);
+     AchiraY[r] = tablaAchira.getString(r, 3);
+     AchiraZ[r] = tablaAchira.getString(r, 4);
+   }
+   */
    
 }
 
@@ -344,6 +397,8 @@ function setup(){
 
 
 function draw(){
+
+  // BOTONES
 
   if (loading == true){
     background(0);
@@ -457,6 +512,7 @@ function draw(){
     //-----               DATOS -----
     //-------------------------------
     
+    // ACHIRA EN LA TORMENTA
     push();
     translate(350,0,150);
     rotateX(frameCount / 15);
@@ -480,9 +536,9 @@ function draw(){
     if (videoAchiraActivo == true) {
     push()
     //texture(videoAchira);
-    texture(videoAchira);
+    texture(screenTest);
     translate(350+150, 0, 150);
-    rotateY(180);
+    rotateY(160);
     rotateZ(180);
     scale(0.75);
     model(modeloPiedraPantalla);
@@ -491,6 +547,7 @@ function draw(){
     
 
     //-------------------------------
+    // SEMILLA
 
     push();
     translate(-250, 0, 100);
@@ -513,14 +570,17 @@ function draw(){
 
     if (videoSemillaActivo == true) {
       push()
-      texture(videoSemilla);
-      translate(-250+150, 0, 100);
+      //texture(videoSemilla);
+      texture(screenTest);
+      //translate(-250, 0, 100);
+      translate(200, -200, -150);
       scale(0.75);
       model(modeloPiedraPantalla);
       pop();
       }
 
     //-------------------------------
+    // FATSIA
 
     push();
     translate(0, 250, -100);
@@ -543,14 +603,15 @@ function draw(){
 
     if (videoFatsiaActivo == true) {
       push()
-      texture(videoFatsia);
-      translate(0+150, 2500, -100);
+      texture(screenTest);
+      translate(-430, -70, 70);
       scale(0.75);
       model(modeloPiedraPantalla);
       pop();
       }
 
     //-------------------------------
+    // BRUS
 
     push();
     translate(0, -250, -100);
@@ -573,9 +634,108 @@ function draw(){
     
     if (videoBrusActivo == true) {
       push()
-      texture(videoBrus);
-      translate(0+150, -250, -100);
+      texture(screenTest);
+      rotateY(60);
+      translate(300, 400, -120);
+      scale(1);
+      model(modeloPiedraPantalla);
+      pop();
+      }
+
+
+    //-------------------------------
+    // LOMBRICES
+
+    push();
+    translate(-150, 100, -300);
+    rotateX(-frameCount / 5);
+    rotateY(-frameCount / 8);
+    rotateZ(frameCount / 5);
+    texture(texturaPiedra1);
+    noStroke();
+    for (let i = 0; i < contadorTres; i++){
+      push();
+      rotateY(i*2);
+      rotateX(i*3);
+      rotateZ(i*4);
+      translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
+      scale(0.1);
+      model(modeloPiedra5);
+      pop();
+    }
+    pop();
+
+    if (videoLombricesActivo == true) {
+      push()
+      texture(screenTest);
+      translate(500, 0, 100);
       scale(0.75);
+      model(modeloPiedraPantalla);
+      pop();
+      }
+
+    //-------------------------------
+    // PAJAROS
+
+    push();
+    translate(-150, -300, 300);
+    rotateX(-frameCount / 5);
+    rotateY(-frameCount / 8);
+    rotateZ(frameCount / 5);
+    //texture(texturaPiedra1);
+    fill(0, 255, 0);
+    noStroke();
+    for (let i = 0; i < contadorTres; i++){
+      push();
+      rotateY(i*2);
+      rotateX(i*3);
+      rotateZ(i*4);
+      translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
+      scale(0.1);
+      model(modeloPiedra5);
+      pop();
+    }
+    pop();
+
+    if (videoPajarosActivo == true) {
+      push()
+      texture(screenTest);
+      translate(-150, -500, 600);
+      rotateX(15);
+      rotateY(90);
+      scale(1.5);
+      model(modeloPiedraPantalla);
+      pop();
+      }
+
+    //-------------------------------
+    // TORTUGA
+
+    push();
+    translate(300, -100, -200);
+    rotateX(-frameCount / 5);
+    rotateY(-frameCount / 8);
+    rotateZ(frameCount / 5);
+    //texture(texturaPiedra1);
+    fill(255, 0, 0);
+    noStroke();
+    for (let i = 0; i < contadorTres; i++){
+      push();
+      rotateY(i*2);
+      rotateX(i*3);
+      rotateZ(i*4);
+      translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
+      scale(0.1);
+      model(modeloPiedra5);
+      pop();
+    }
+    pop();
+
+    if (videoTortugaActivo == true) {
+      push()
+      texture(screenTest);
+      translate(500, -100, -50);
+      scale(1);
       model(modeloPiedraPantalla);
       pop();
       }
@@ -646,6 +806,17 @@ function cadaDosSeg(){
 
   if (contadorTres == 0 & estadoContadorTres == false) {
     estadoContadorTres = true;
+  }
+}
+
+
+function loopRespira(){
+
+  if (textoRespira > 250 ) {
+    textoRespira++;
+  }
+  if (textoRespira < 250) {
+    textoRespira = 0;
   }
 }
 
@@ -724,14 +895,38 @@ estadoSemilla = {
 
 estadoFatsia = {
   distance : 336.35,                 // scalar
-  center   : [-298.8, 9.31, 97],         // vector
-  rotation : [0.40, -0.05, 0.91, 0],  // quaternion
+  center   : [-340.11, -31.74, 131.63],         // vector
+  rotation : [0.16, -0.08, 0.97, 0],  // quaternion
 }
 
 estadoBrus = {
-  distance : 295,                 // scalar
-  center   : [92.21312168018297, 234.88868295258973, -259.3242005560117],         // vector
-  rotation : [0.7177836424269413, -0.1647329217013579, -0.67154105369265, 0],  // quaternion
+  distance : 228,                 // scalar
+  center   : [126.32, 380.18, -219.44],         // vector
+  rotation : [0.72, -0.16, -0.67, 0],  // quaternion
+}
+
+estadoLombrices = {
+  distance : 724,                 // scalar
+  center   : [400, 249, -351],         // vector
+  rotation : [0.97, -0.22, -0.01, 0],  // quaternion
+}
+
+estadoPajaros = {
+  distance : 1119,                 // scalar
+  center   : [488, -149.8, 767.25],         // vector
+  rotation : [0.57, -0.36, 0.73, 0],  // quaternion
+}
+
+estadoTortuga = {
+  distance : 545,                 // scalar
+  center   : [471.37, -40.83, -260.12],         // vector
+  rotation : [0.97, -0.14, 0.13, 0],  // quaternion
+}
+
+estadoBailarina = {
+  distance : 250,                 // scalar
+  center   : [0, 0, 0],         // vector
+  rotation : [-1, 0, 0, 0],  // quaternion
 }
 
 function keyReleased(){
@@ -763,7 +958,7 @@ function moverAchira(){
 
   botonActivo = false;
   videoAchiraActivo = true;
-  videoBailarinaActivo = false;
+  //videoBailarinaActivo = false;
   
 }
 
@@ -816,7 +1011,7 @@ function moverBrus(){
 }
 
 function moverLombrices(){
-  //easycam.setState(estadoFatsia, 2000);
+  easycam.setState(estadoLombrices, 2000);
   botonAchira.hide()
   botonSemilla.hide();
   botonFatsia.hide();
@@ -832,7 +1027,7 @@ function moverLombrices(){
 }
 
 function moverPajaros(){
-  //easycam.setState(estadoFatsia, 2000);
+  easycam.setState(estadoPajaros, 2000);
   botonAchira.hide()
   botonSemilla.hide();
   botonFatsia.hide();
@@ -848,7 +1043,7 @@ function moverPajaros(){
 }
 
 function moverTortuga(){
-  //easycam.setState(estadoFatsia, 2000);
+  easycam.setState(estadoTortuga, 2000);
   botonAchira.hide()
   botonSemilla.hide();
   botonFatsia.hide();
@@ -864,7 +1059,7 @@ function moverTortuga(){
 }
 
 function moverBailarina(){
-  //easycam.setState(estadoFatsia, 2000);
+  easycam.setState(estadoBailarina, 2000);
   botonAchira.hide()
   botonSemilla.hide();
   botonFatsia.hide();
@@ -881,6 +1076,6 @@ function moverBailarina(){
   videoBailarinaActivo = true;
 }
 
-// Programado por Nic Motta _ nicmotta.github.io 
+// Programado por Nic Motta / nicmotta.github.io 
 // NAMIKI - MURU7.8 
 // 2021
