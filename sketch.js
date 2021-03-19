@@ -23,22 +23,6 @@ let creds = {
 /// VARIABLES ///////
 /////////////////////
 
-let eje_x_1 = [100];
-let eje_y_1 = [100];
-let eje_z_1 = [100];
-
-let eje_x_2 = [100];
-let eje_y_2 = [100];
-let eje_z_2 = [100];
-
-let eje_x_3 = [100];
-let eje_y_3 = [100];
-let eje_z_3 = [100];
-
-let eje_x_4 = [100];
-let eje_y_4 = [100];
-let eje_z_4 = [100];
-
 let AchiraX = [100];
 let AchiraY = [100];
 let AchiraZ = [100];
@@ -151,18 +135,18 @@ function preload() {
 
   // TABLAS ///
 
-  table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
-  table2 = loadTable('assets/csv/natural_2.csv', 'csv', 'header');
-  table3 = loadTable('assets/csv/natural_3.csv', 'csv', 'header');
-  table4 = loadTable('assets/csv/natural_4.csv', 'csv', 'header');
+  //table = loadTable('assets/csv/natural_1.csv', 'csv', 'header');
+  //table2 = loadTable('assets/csv/natural_2.csv', 'csv', 'header');
+  //table3 = loadTable('assets/csv/natural_3.csv', 'csv', 'header');
+ // table4 = loadTable('assets/csv/natural_4.csv', 'csv', 'header');
 
-  //tablaAchira = loadTable('assets/csv/achira.csv', 'csv', 'header');
-  //tablaSemillas = loadTable('assets/csv/semillas.csv', 'csv', 'header');
-  //tablaFatsia = loadTable('assets/csv/fatsia.csv', 'csv', 'header');
-  //tablaBrus = loadTable('assets/csv/brus.csv', 'csv', 'header');
-  //tablaLombrices = loadTable('assets/csv/lombrices.csv', 'csv', 'header');
-  //tablaPajaros = loadTable('assets/csv/pajaros.csv', 'csv', 'header');
-  //tablaTortuga = loadTable('assets/csv/tortuga.csv', 'csv', 'header');
+  tablaAchira = loadTable('assets/csv/achira.csv', 'csv', 'header');
+  tablaSemillas = loadTable('assets/csv/semillas.csv', 'csv', 'header');
+  tablaFatsia = loadTable('assets/csv/fatsia.csv', 'csv', 'header');
+  tablaBrus = loadTable('assets/csv/brus.csv', 'csv', 'header');
+  tablaLombrices = loadTable('assets/csv/lombrices.csv', 'csv', 'header');
+  tablaPajaros = loadTable('assets/csv/pajaros.csv', 'csv', 'header');
+  tablaTortuga = loadTable('assets/csv/tortuga.csv', 'csv', 'header');
 
 
   // TEXTURAS ///
@@ -353,43 +337,55 @@ function setup(){
     contadorTres = 0;
 
 
-   for (let r = 0; r < table.getRowCount(); r++)
-   {
-     eje_x_1[r] = table.getString(r, 2);
-     eje_y_1[r] = table.getString(r, 3);
-     eje_z_1[r] = table.getString(r, 4);
-   }
-
-   for (let r = 0; r < table2.getRowCount(); r++)
-   {
-     eje_x_2[r] = table2.getString(r, 2);
-     eje_y_2[r] = table2.getString(r, 3);
-     eje_z_2[r] = table2.getString(r, 4);
-   }
-
-   for (let r = 0; r < table3.getRowCount(); r++)
-   {
-     eje_x_3[r] = table3.getString(r, 2);
-     eje_y_3[r] = table3.getString(r, 3);
-     eje_z_3[r] = table3.getString(r, 4);
-   }
-
-   for (let r = 0; r < table4.getRowCount(); r++)
-   {
-     eje_x_4[r] = table4.getString(r, 2);
-     eje_y_4[r] = table4.getString(r, 3);
-     eje_z_4[r] = table4.getString(r, 4);
-   }
-
-
-   /*
+   
    for (let r = 0; r < tablaAchira.getRowCount(); r++)
    {
-     AchiraX[r] = tablaAchira.getString(r, 2);
-     AchiraY[r] = tablaAchira.getString(r, 3);
-     AchiraZ[r] = tablaAchira.getString(r, 4);
+     AchiraX[r] = tablaAchira.getString(r, 0);
+     AchiraY[r] = tablaAchira.getString(r, 1);
+     AchiraZ[r] = tablaAchira.getString(r, 2);
    }
-   */
+
+   for (let r = 0; r < tablaSemillas.getRowCount(); r++)
+   {
+    SemillasX[r] = tablaSemillas.getString(r, 0);
+    SemillasY[r] = tablaSemillas.getString(r, 1);
+    SemillasZ[r] = tablaSemillas.getString(r, 2);
+   }
+
+   for (let r = 0; r < tablaFatsia.getRowCount(); r++)
+   {
+    FatsiaX[r] = tablaFatsia.getString(r, 0);
+    FatsiaY[r] = tablaFatsia.getString(r, 1);
+    FatsiaZ[r] = tablaFatsia.getString(r, 2);
+   }
+
+   for (let r = 0; r < tablaBrus.getRowCount(); r++)
+   {
+    BrusX[r] = tablaBrus.getString(r, 0);
+    BrusY[r] = tablaBrus.getString(r, 1);
+    BrusZ[r] = tablaBrus.getString(r, 2);
+   }
+
+   for (let r = 0; r < tablaLombrices.getRowCount(); r++)
+   {
+    LombricesX[r] = tablaLombrices.getString(r, 0);
+    LombricesY[r] = tablaLombrices.getString(r, 1);
+    LombricesZ[r] = tablaLombrices.getString(r, 2);
+   }
+
+   for (let r = 0; r < tablaPajaros.getRowCount(); r++)
+   {
+    PajarosX[r] = tablaPajaros.getString(r, 0);
+    PajarosY[r] = tablaPajaros.getString(r, 1);
+    PajarosZ[r] = tablaPajaros.getString(r, 2);
+   }
+
+   for (let r = 0; r < tablaTortuga.getRowCount(); r++)
+   {
+    TortugaX[r] = tablaTortuga.getString(r, 0);
+    TortugaY[r] = tablaTortuga.getString(r, 1);
+    TortugaZ[r] = tablaTortuga.getString(r, 2);
+   }
    
 }
 
@@ -525,7 +521,7 @@ function draw(){
       rotateY(i*2);
       rotateX(i*3);
       rotateZ(i*4);
-      translate(eje_x_1[i], eje_y_1[i], eje_z_1[i]);
+      translate(AchiraX[i], AchiraY[i], AchiraZ[i]);
       scale(0.1);
       model(modeloPiedra4);
       pop();
@@ -536,7 +532,7 @@ function draw(){
     if (videoAchiraActivo == true) {
     push()
     //texture(videoAchira);
-    texture(screenTest);
+    texture(videoAchira);
     translate(350+150, 0, 150);
     rotateY(160);
     rotateZ(180);
@@ -561,7 +557,7 @@ function draw(){
       rotateY(i*2);
       rotateX(i*3);
       rotateZ(i*4);
-      translate(eje_x_2[i], eje_y_2[i], eje_z_2[i]);
+      translate(SemillasX[i], SemillasY[i], SemillasZ[i]);
       scale(0.1);
       model(modeloPiedra5);
       pop();
@@ -594,7 +590,7 @@ function draw(){
       rotateY(i*2);
       rotateX(i*3);
       rotateZ(i*4);
-      translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
+      translate(FatsiaX[i], FatsiaY[i], FatsiaZ[i]);
       scale(0.1);
       model(modeloPiedra6);
       pop();
@@ -625,7 +621,7 @@ function draw(){
       rotateY(i*2);
       rotateX(i*3);
       rotateZ(i*4);
-      translate(eje_x_4[i], eje_y_4[i], eje_z_4[i]);
+      translate(BrusX[i], BrusY[i], BrusZ[i]);
       scale(0.1);
       model(modeloPiedra7);
       pop();
@@ -658,7 +654,7 @@ function draw(){
       rotateY(i*2);
       rotateX(i*3);
       rotateZ(i*4);
-      translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
+      translate(LombricesX[i], LombricesY[i], LombricesZ[i]);
       scale(0.1);
       model(modeloPiedra5);
       pop();
@@ -682,15 +678,14 @@ function draw(){
     rotateX(-frameCount / 5);
     rotateY(-frameCount / 8);
     rotateZ(frameCount / 5);
-    //texture(texturaPiedra1);
-    fill(0, 255, 0);
+    texture(texturaPiedra1);
     noStroke();
     for (let i = 0; i < contadorTres; i++){
       push();
       rotateY(i*2);
       rotateX(i*3);
       rotateZ(i*4);
-      translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
+      translate(PajarosX[i], PajarosY[i], PajarosZ[i]);
       scale(0.1);
       model(modeloPiedra5);
       pop();
@@ -716,15 +711,14 @@ function draw(){
     rotateX(-frameCount / 5);
     rotateY(-frameCount / 8);
     rotateZ(frameCount / 5);
-    //texture(texturaPiedra1);
-    fill(255, 0, 0);
+    texture(texturaPiedra2);
     noStroke();
     for (let i = 0; i < contadorTres; i++){
       push();
       rotateY(i*2);
       rotateX(i*3);
       rotateZ(i*4);
-      translate(eje_x_3[i], eje_y_3[i], eje_z_3[i]);
+      translate(TortugaX[i], TortugaY[i], TortugaZ[i]);
       scale(0.1);
       model(modeloPiedra5);
       pop();
