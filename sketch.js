@@ -6,16 +6,16 @@
 
 // MQTT client details:
 let broker = {
-  hostname: 'broker.shiftr.io',
-  port: 443
+  hostname: 'data-nec.cloud.shiftr.io',
+  port: 1883
 };
 // MQTT client:
 let client;
 // client credentials:
 let creds = {
-  clientID: 'p5ClientNEC',
-  userName: 'b9b9d1f7',
-  password: '860f838a013c6f86'
+  clientID: 'Namiki-Espacio-Digital',
+  userName: 'data-nec',
+  password: 'd9ltoA25VeCmJ7n5'
 }
 
 
