@@ -77,7 +77,9 @@ let videoTortugaActivo = false;
 let videoBailarinaActivo = false;
 
 
-let textoRespira = 0;
+let textoRespira = 1;
+
+let col;
 
 function preload() {
 
@@ -109,11 +111,6 @@ function preload() {
   videoBrus.volume(0);
   videoBrus.loop();
 
-  videoLombrices = createVideo("assets/videos/videoLombrices.mp4");
-  videoLombrices.hide();
-  videoLombrices.volume(0);
-  videoLombrices.loop();
-
   videoPajaros = createVideo("assets/videos/videoPajaros.mp4");
   videoPajaros.hide();
   videoPajaros.volume(0);
@@ -130,7 +127,7 @@ function preload() {
   videoBailarina.loop();
 
   // SONIDOS ///
- sonidoAchira = loadSound("assets/sounds/sonidoAchira.mp3");
+  sonidoAchira = loadSound("assets/sounds/sonidoAchira.mp3");
 
 
   // TABLAS ///
@@ -156,7 +153,7 @@ function preload() {
   texturaPiedra3 = loadImage('assets/materials/texturaPiedra3.jpg');
   texturaPiedra4 = loadImage('assets/materials/texturaPiedra4.jpg');
   skySphere = loadImage('assets/materials/skySphere.jpg');
-  screenTest = loadImage('assets/videos/ScreenTest.png');
+ 
 
 
   // MODELOS 3D ////
@@ -190,8 +187,6 @@ function setup(){
 
 
     // SETEOS INICIALES
-
-    
 
 
     /// ---------------------------------
@@ -302,6 +297,8 @@ function setup(){
     botonBailarina.mouseClicked(moverBailarina);
 
 
+    col = color(100, 100, 100);
+
 
     ///////////////////
     // MQTT  
@@ -328,7 +325,7 @@ function setup(){
     setInterval(cadaUnSeg, 1000);
     setInterval(cadaUnSegYMedio, 1500);
     setInterval(cadaDosSeg, 2000);
-    setInterval(loopRespira, 50);
+    setInterval(loopRespira, 20);
 
     // INIT DE CONTADORES ///
 
@@ -393,6 +390,19 @@ function setup(){
 
 
 function draw(){
+
+
+  botonContinuar.style('color', col);
+  botonAchira.style('color', col);
+  botonSemilla.style('color', col);
+  botonFatsia.style('color', col);
+  botonBrus.style('color', col);
+  botonLombrices.style('color', col);
+  botonPajaros.style('color', col);
+  botonTortuga.style('color', col);
+  botonBailarina.style('color', col);
+
+
 
   // BOTONES
 
@@ -567,7 +577,7 @@ function draw(){
     if (videoSemillaActivo == true) {
       push()
       //texture(videoSemilla);
-      texture(screenTest);
+      texture(videoSemilla);
       //translate(-250, 0, 100);
       translate(200, -200, -150);
       scale(0.75);
@@ -599,7 +609,7 @@ function draw(){
 
     if (videoFatsiaActivo == true) {
       push()
-      texture(screenTest);
+      texture(videoFatsia);
       translate(-430, -70, 70);
       scale(0.75);
       model(modeloPiedraPantalla);
@@ -630,7 +640,7 @@ function draw(){
     
     if (videoBrusActivo == true) {
       push()
-      texture(screenTest);
+      texture(videoBrus);
       rotateY(60);
       translate(300, 400, -120);
       scale(1);
@@ -663,7 +673,7 @@ function draw(){
 
     if (videoLombricesActivo == true) {
       push()
-      texture(screenTest);
+      texture(videoBailarina);
       translate(500, 0, 100);
       scale(0.75);
       model(modeloPiedraPantalla);
@@ -694,7 +704,7 @@ function draw(){
 
     if (videoPajarosActivo == true) {
       push()
-      texture(screenTest);
+      texture(videoPajaros);
       translate(-150, -500, 600);
       rotateX(15);
       rotateY(90);
@@ -727,7 +737,7 @@ function draw(){
 
     if (videoTortugaActivo == true) {
       push()
-      texture(screenTest);
+      texture(videoTortuga);
       translate(500, -100, -50);
       scale(1);
       model(modeloPiedraPantalla);
@@ -747,7 +757,7 @@ function cadaUnSeg(){
   contadorUno++;
   }
 
-  if (contadorUno > eje_x_1.length ) {
+  if (contadorUno > AchiraX.length ) {
     //contador = 0;
     estadoContadorUno = false;
   }
@@ -768,7 +778,7 @@ function cadaUnSegYMedio(){
   contadorDos++;
   }
 
-  if (contadorDos > eje_x_1.length ) {
+  if (contadorDos > AchiraX.length ) {
     //contador = 0;
     estadoContadorDos = false;
   }
@@ -789,7 +799,7 @@ function cadaDosSeg(){
   contadorTres++;
   }
 
-  if (contadorTres > eje_x_1.length ) {
+  if (contadorTres > AchiraX.length ) {
     //contador = 0;
     estadoContadorTres = false;
   }
@@ -806,12 +816,16 @@ function cadaDosSeg(){
 
 function loopRespira(){
 
-  if (textoRespira > 250 ) {
-    textoRespira++;
-  }
-  if (textoRespira < 250) {
+  col = color(textoRespira, textoRespira, textoRespira);
+
+  textoRespira++;
+
+  if (textoRespira == 255){
     textoRespira = 0;
   }
+
+  //console.log(col);
+
 }
 
 
