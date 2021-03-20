@@ -7,7 +7,7 @@
 // MQTT client details:
 let broker = {
   hostname: 'data-nec.cloud.shiftr.io',
-  port: 1883
+  port: 443
 };
 // MQTT client:
 let client;
@@ -51,6 +51,11 @@ let TortugaX = [100];
 let TortugaY = [100];
 let TortugaZ = [100];
 
+let MQTTx = [30];
+let MQTTy = [30];
+let MQTTz = [30];
+let MQTTContador = 0;
+
 
 let x, y;
 let easycam;
@@ -80,6 +85,10 @@ let videoBailarinaActivo = false;
 let textoRespira = 1;
 
 let col;
+
+let MQTTValorX;
+let MQTTValorY;
+let MQTTValorZ;
 
 function preload() {
 
@@ -458,6 +467,7 @@ function draw(){
     // --- PIEDRA CENTRAL INICIO  --
     // -----------------------------
 
+    /*
     push()
     texture(texturaPiedra4);
     //translate(0, 0, 0);
@@ -467,7 +477,7 @@ function draw(){
     scale(0.5);
     model(modeloPiedra7);
     pop();
-
+    */
 
 
 
@@ -517,6 +527,27 @@ function draw(){
     //----- VISUALIZACIÓN       -----
     //-----               DATOS -----
     //-------------------------------
+
+        // PIEDRA DEL CENTRO
+        push();
+        translate(0,0,0);
+        rotateX(frameCount / 15);
+        rotateY(frameCount / 16);
+        rotateZ(frameCount / 17);
+        texture(texturaPiedra4);
+        noStroke();
+        for (let i = 0; i < contadorUno; i++){
+          push();
+          rotateY(i*2);
+          rotateX(i*3);
+          rotateZ(i*4);
+          translate(MQTTx[i], MQTTy[i], MQTTz[i]);
+          scale(0.05);
+          model(modeloPiedra2);
+          pop();
+        }
+    
+        pop();
     
     // ACHIRA EN LA TORMENTA
     push();
@@ -838,9 +869,7 @@ function loopRespira(){
 // called when the client connects
 function onConnect() {
   console.log('client is connected');
-  client.subscribe("/namiki/rotacionX");
-  client.subscribe("/namiki/rotacionY");
-  client.subscribe("/namiki/rotacionZ");
+  client.subscribe("MPU9250/namiki-digital");
 
 }
 
@@ -853,37 +882,47 @@ function onConnectionLost(response) {
 
 // called when a message arrives
 function onMessageArrived(message) {
-  let  incomingNumber = parseInt(message.payloadString);
+
+  let llegaMensaje = split(message.payloadString, ',');
+
+  MQTTValorX = parseFloat(llegaMensaje[0]);
+  MQTTValorY = parseFloat(llegaMensaje[1]);
+  MQTTValorZ = parseFloat(llegaMensaje[2]);
+
+  MQTTContador = MQTTContador + 1;
+  
+  if (MQTTContador == 29) {
+    MQTTContador = 0;
+  }
+
+  MQTTx[MQTTContador] =  MQTTValorX;
+  MQTTy[MQTTContador] =  MQTTValorY;
+  MQTTz[MQTTContador] =  MQTTValorZ;
+
+  console.log(MQTTx.length);
+
 }
+
 
 // called when you want to send a message:
 function sendMqttMessage() {
+
+  /*
   // if the client is connected to the MQTT broker:
   if (client.isConnected()) {
       rotacionX = new Paho.MQTT.Message(String(rotationX));
-      rotacionX.destinationName = "namiki/rotacionX";
+      rotacionX.destinationName = "MPU9250/namiki-digital/giroscopio-x";
       client.send(rotacionX);
 
       rotacionY = new Paho.MQTT.Message(String(rotationY));
-      rotacionY.destinationName = "namiki/rotacionY";
+      rotacionY.destinationName = "MPU9250/namiki-digital/giroscopio-y";
       client.send(rotacionY);
 
       rotacionZ = new Paho.MQTT.Message(String(rotationZ));
-      rotacionZ.destinationName = "namiki/rotacionZ";
+      rotacionZ.destinationName = "MPU9250/namiki-digital/giroscopio-z";
       client.send(rotacionZ);
-
-      aceX = new Paho.MQTT.Message(String(accelerationX));
-      aceX.destinationName = "namiki/aceX";
-      client.send(aceX);
-
-      aceY = new Paho.MQTT.Message(String(accelerationY));
-      aceY.destinationName = "namiki/aceY";
-      client.send(aceY);
-
-      aceZ = new Paho.MQTT.Message(String(accelerationZ));
-      aceZ.destinationName = "namiki/aceZ";
-      client.send(aceZ);
   }
+  */
 }
 
 
