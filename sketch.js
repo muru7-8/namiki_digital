@@ -611,10 +611,11 @@ function draw(){
 
     if (videoSemillaActivo == true) {
       push()
-      //texture(videoSemilla);
       texture(videoSemilla);
       //translate(-250, 0, 100);
       translate(200, -200, -150);
+      rotateY(180);
+      rotateZ(180);
       scale(0.75);
       model(modeloPiedraPantalla);
       pop();
@@ -646,6 +647,8 @@ function draw(){
       push()
       texture(videoFatsia);
       translate(-430, -70, 70);
+      //rotateY(180);
+      rotateZ(180);
       scale(0.75);
       model(modeloPiedraPantalla);
       pop();
@@ -678,6 +681,8 @@ function draw(){
       texture(videoBrus);
       rotateY(60);
       translate(300, 400, -120);
+      rotateY(180);
+      rotateZ(180);
       scale(1);
       model(modeloPiedraPantalla);
       pop();
@@ -710,6 +715,8 @@ function draw(){
       push()
       texture(videoBailarina);
       translate(500, 0, 100);
+      rotateY(180);
+      rotateZ(180);
       scale(0.75);
       model(modeloPiedraPantalla);
       pop();
@@ -743,6 +750,7 @@ function draw(){
       translate(-150, -500, 600);
       rotateX(15);
       rotateY(90);
+      rotateZ(180);
       scale(1.5);
       model(modeloPiedraPantalla);
       pop();
@@ -774,6 +782,8 @@ function draw(){
       push()
       texture(videoTortuga);
       translate(500, -100, -50);
+      rotateY(180);
+      rotateZ(180);
       scale(1);
       model(modeloPiedraPantalla);
       pop();
