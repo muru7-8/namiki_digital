@@ -7,6 +7,8 @@ html, body {
     align-content: center;
   }
 
+ 
+
   img {
     position: absolute;
     align-content: center;
@@ -15,6 +17,18 @@ html, body {
     margin-right: 10%;
     width: 80%;
     height: auto;
+  }
+
+  .downloading {
+    position: absolute;
+    align-content: center;
+    align-items: center;
+    margin-left: 42%;
+    margin-right: 40%;
+    margin-top: 30%;
+    height: auto;
+    width: 12%;
+
   }
 
   h1 {

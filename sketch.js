@@ -437,7 +437,7 @@ function draw(){
 
     document.getElementById('img-loading').style.display = 'none';
     document.getElementById('intro-namiki').style.display = 'none';
-    document.getElementById('loading').style.display = 'none';
+    document.getElementById('gif-loading').style.display = 'none';
 
     easycam.attachMouseListeners();
 
