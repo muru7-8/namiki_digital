@@ -285,7 +285,7 @@ function setup(){
     botonPajaros.style("font-size", "24px");
     botonPajaros.mouseClicked(moverPajaros);
 
-    botonTortuga.size(50,50);
+    botonTortuga.size(50,50); //
     botonTortuga.style('background-color', 'Transparent');
     botonTortuga.style('color', 'gray');
     botonTortuga.style('border', 'none');
