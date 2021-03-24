@@ -19,15 +19,6 @@ let creds = {
 }
 
 
-
-	WebFont.load({
-		google: {
-			families: ['Titillium Web :200']
-		}
-	});
-
-
-
 /////////////////////
 /// VARIABLES ///////
 /////////////////////
@@ -230,7 +221,6 @@ function setup(){
     botonContinuar.style('width', '100%');
     botonContinuar.position(0,windowHeight - 80);
     botonContinuar.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
     botonContinuar.style("font-size", "22px");
     botonContinuar.mouseClicked(afterLoad);
     

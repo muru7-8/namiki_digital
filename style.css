@@ -78,4 +78,19 @@ html, body {
     background-color: gold;
   }
 
-  
+  button {
+    position: absolute;
+    
+    color: gray;
+    border: none;
+    width: 50%;
+    font-size: 24px;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 300;
+    transition: color .5s;
+
+  }
+
+  button:hover {
+    color: white;
+  }
