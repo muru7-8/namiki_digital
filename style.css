@@ -1,10 +1,56 @@
 html, body {
+    font-family: 'Titillium Web', sans-serif;
     background-color: black;
     margin: 0;
     padding: 0;
     align-items: center;
     align-content: center;
   }
+
+  img {
+    position: absolute;
+    align-content: center;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    height: auto;
+  }
+
+  h1 {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 26px;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    text-align: center;
+    padding: 0;
+    margin-top: 12%;
+    margin-bottom: 25%;
+    margin-left: 25%;
+    margin-right: 25%;
+
+    color: gainsboro;
+  }
+
+  h2 {
+    font-family: 'Titillium Web', sans-serif;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    text-align: center;
+    padding: 0;
+    margin-top: 35%;
+    margin-bottom: 0%;
+    margin-left: 45%;
+    margin-right: 45%;
+
+    color: gainsboro;
+  }
+
+  
+
+
   canvas {
     display:block
   }
@@ -17,3 +63,5 @@ html, body {
   a:hover {
     background-color: gold;
   }
+
+  

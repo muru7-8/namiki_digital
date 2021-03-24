@@ -285,7 +285,7 @@ function setup(){
     botonPajaros.style("font-size", "24px");
     botonPajaros.mouseClicked(moverPajaros);
 
-    botonTortuga.size(50,50); //
+    botonTortuga.size(50,50);
     botonTortuga.style('background-color', 'Transparent');
     botonTortuga.style('color', 'gray');
     botonTortuga.style('border', 'none');
@@ -428,12 +428,16 @@ function draw(){
     botonBailarina.hide();
     easycam.removeMouseListeners();
     imageMode(CENTER);
-    image(PantallaInicioTest, 0, 0, 600, 300);
+    //image(PantallaInicioTest, 0, 0, 600, 300);
 
   }
 
   if (loading == false)
   {
+
+    document.getElementById('img-loading').style.display = 'none';
+    document.getElementById('intro-namiki').style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
 
     easycam.attachMouseListeners();
 
