@@ -68,6 +68,7 @@ let botonAchira, botonSemilla, botonFatsia, botonBrus, botonLombrices, botonPaja
 let table, table2, table3, table4;
 let tablaAchira, tablaSemillas, tablaFatsia, tablaBrus, tablaLombrices, tablaPajaros, tablaTortuga;
 let sonidoAchira;
+let botonVolver;
 
 let loading = true;
 let botonActivo = true;
@@ -232,7 +233,7 @@ function setup(){
     botonAchira.style('width', '100%');
     botonAchira.position(0,windowHeight - 80);
     botonAchira.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
+    botonAchira.style("font-weight", "200");
     botonAchira.style("font-size", "22px");
     botonAchira.mouseClicked(moverAchira);
 
@@ -243,7 +244,7 @@ function setup(){
     botonSemilla.style('width', '100%');
     botonSemilla.position(0,windowHeight - 80);
     botonSemilla.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
+    botonSemilla.style("font-weight", "200");
     botonSemilla.style("font-size", "22px");
     botonSemilla.mouseClicked(moverSemilla);
 
@@ -254,7 +255,7 @@ function setup(){
     botonFatsia.style('width', '100%');
     botonFatsia.position(0,windowHeight - 80);
     botonFatsia.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
+    botonFatsia.style("font-weight", "200");
     botonFatsia.style("font-size", "22px");
     botonFatsia.mouseClicked(moverFatsia);
 
@@ -265,7 +266,7 @@ function setup(){
     botonBrus.style('width', '100%');
     botonBrus.position(0,windowHeight - 80);
     botonBrus.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
+    botonBrus.style("font-weight", "200");
     botonBrus.style("font-size", "22px");
     botonBrus.mouseClicked(moverBrus);
 
@@ -276,7 +277,7 @@ function setup(){
     botonLombrices.style('width', '100%');
     botonLombrices.position(0,windowHeight - 80);
     botonLombrices.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
+    botonLombrices.style("font-weight", "200");
     botonLombrices.style("font-size", "22px");
     botonLombrices.mouseClicked(moverLombrices);
 
@@ -287,7 +288,7 @@ function setup(){
     botonPajaros.style('width', '100%');
     botonPajaros.position(0,windowHeight - 80);
     botonPajaros.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
+    botonPajaros.style("font-weight", "200");
     botonPajaros.style("font-size", "22px");
     botonPajaros.mouseClicked(moverPajaros);
 
@@ -298,7 +299,7 @@ function setup(){
     botonTortuga.style('width', '100%');
     botonTortuga.position(0,windowHeight - 80);
     botonTortuga.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
+    botonTortuga.style("font-weight", "200");
     botonTortuga.style("font-size", "22px");
     botonTortuga.mouseClicked(moverTortuga);
 
@@ -309,7 +310,7 @@ function setup(){
     botonBailarina.style('width', '100%');
     botonBailarina.position(0,windowHeight - 80);
     botonBailarina.style("Titillium Web", "sans-serif");
-    botonContinuar.style("font-weight", "200");
+    botonBailarina.style("font-weight", "200");
     botonBailarina.style("font-size", "22px");
     botonBailarina.mouseClicked(moverBailarina);
 
