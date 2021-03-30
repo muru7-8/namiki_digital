@@ -348,6 +348,7 @@ function setup(){
     setInterval(cadaUnSegYMedio, 1500);
     setInterval(cadaDosSeg, 2000);
     setInterval(loopRespira, 20);
+    setInterval(botonVolver, 1000);
 
     // INIT DE CONTADORES ///
 
@@ -805,6 +806,10 @@ function draw(){
  
   }
 
+  if (contadorUno > 20){
+    document.getElementById('botonVolver').style.visibility = 'visible';
+  }
+
 }
 
 
@@ -1048,6 +1053,8 @@ function moverSemilla(){
   botonBailarina.hide();
   botonContinuar.hide();
 
+  document.getElementById('botonVolver').style.display = 'block';
+
   videoAchiraActivo = false;
   videoSemillaActivo = true;
 }
@@ -1144,13 +1151,13 @@ function moverBailarina(){
   botonBailarina.hide();
   botonContinuar.hide();
 
-  document.getElementById('botonVolver').style.display = 'block';
 
   botonActivo = true;
 
   videoTortugaActivo = false;
   videoBailarinaActivo = true;
 }
+
 
 // Programado por Nic Motta / nicmotta.github.io 
 // NAMIKI - MURU7.8 
