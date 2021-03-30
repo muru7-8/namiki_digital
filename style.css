@@ -79,7 +79,7 @@ html, body {
   }
 
   button {
-    background: black;
+    background: transparent;
     position: absolute;
     color: white;
     border: none;

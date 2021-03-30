@@ -91,6 +91,8 @@ let MQTTValorX;
 let MQTTValorY;
 let MQTTValorZ;
 
+document.getElementById('botonVolver').style.display = 'none';
+
 function preload() {
 
   // IMAGENES ///
@@ -314,6 +316,8 @@ function setup(){
     botonBailarina.style("font-size", "22px");
     botonBailarina.mouseClicked(moverBailarina);
 
+    
+
 
     col = color(100, 100, 100);
 
@@ -420,7 +424,7 @@ function draw(){
   botonTortuga.style('color', col);
   botonBailarina.style('color', col);
 
-
+  document.getElementById('botonVolver').style.color = col;
 
   // BOTONES
 
@@ -1139,6 +1143,8 @@ function moverBailarina(){
   botonTortuga.hide();
   botonBailarina.hide();
   botonContinuar.hide();
+
+  document.getElementById('botonVolver').style.display = 'block';
 
   botonActivo = true;
 
